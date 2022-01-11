@@ -1,19 +1,27 @@
+from xml.etree import ElementTree as ET
 from xml.dom import minidom
-import os
 
-root = minidom.Document()
+# Assume that we have an existing XML document with one "data" child
+fle=open("file_notes.xml","w")
+fle.close()
+doc = ET.parse("file_notes.xml")
+root = doc.getroot()
 
-xml = root.createElement('root')
-root.appendChild(xml)
+# Create 2 new "data" elements
+data1 = ET.Element("data", {"a_version": "something_v001.0002.ma",
+                            "b_user": "You",
+                            "c_comment": "minor save"})
+data2 = ET.Element("data", {"a_version": "something_v001.0003.ma",
+                            "b_user": "Them",
+                            "c_comment": "major save"})
 
-productChild = root.createElement('product')
-productChild.setAttribute('name', 'Geeks for Geeks')
+# Append the new "data" elements to the root element of the XML document
+root.append(data1)
+root.append(data2)
 
-xml.appendChild(productChild)
+# Now we have a new well-formed XML document. It is not very nicely formatted...
+out = ET.tostring(root)
 
-xml_str = root.toprettyxml(indent="\t")
-
-save_path_file = "gfg.xml"
-
-with open(save_path_file, "w") as f:
-    f.write(xml_str) 
+# ...so we'll use minidom to make the output a little prettier
+dom = minidom.parseString(out)
+print (dom.toprettyxml())
