@@ -1,4 +1,4 @@
-
+import xml.etree.ElementTree as ET
 
 username="CsAlex"
 userpass="alex"
@@ -16,11 +16,11 @@ systemlocale=""
 UiLang=""
 
 
+#https://dellwindowsreinstallationguide.com/the-oem-folder/
 
+# https://www.tenforums.com/tutorials/131765-apply-unattended-answer-file-windows-10-install-media.html
 
-
-
-
+# https://github.com/pbatard/Fido
 print(f'',file=fle)
 print(f'',file=fle)
 print(f'<?xml version="1.0" encoding="utf-8"?>',file=fle)
@@ -147,3 +147,6 @@ print(f'<TimeZone>GTB Standard Time</TimeZone>',file=fle)
 print(f'</component>',file=fle)
 print(f'</settings>',file=fle)
 print(f'</unattend>',file=fle)
+
+
+
