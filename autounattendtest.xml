@@ -2,8 +2,24 @@
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<SetupUILanguage>
+				<UILanguage>en-US</UILanguage>
+			</SetupUILanguage>
+			<InputLocale>en-US</InputLocale>
+			<SystemLocale>hu-HU</SystemLocale>
 			<UILanguage>en-US</UILanguage>
-			<InputLocale>040e:0000040e</InputLocale>
+			<UserLocale>hu-HU</UserLocale>
+		</component>
+		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<UserData>
+				<ProductKey>
+					<Key>W269N-WFGWX-YVC9B-4J6C9-T83GX</Key>
+					<WillShowUI>Never</WillShowUI>
+				</ProductKey>
+				<AcceptEula>true</AcceptEula>
+				<FullName>teszt_elek</FullName>
+				<Organization/>
+			</UserData>
 		</component>
 	</settings>
 </unattend>

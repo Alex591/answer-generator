@@ -1,6 +1,6 @@
 from xml.dom import minidom
 from xml.etree import ElementTree as ET
-
+import handler
 
 class Writer():
     def __init__(self):
@@ -11,10 +11,13 @@ class Writer():
         # self.root.setAttribute("xmlns", "urn:schemas-microsoft-com:unattend")
         # self.document.appendChild(self.root)
 
-    def add_win_pe_pass(self,architecture:str="amd64",setuplang:str="en-US",inputlocale:str=None,systemlocale:str=None,UserLocale:str=None):
+    def add_win_pe_pass(self, architecture:str="amd64", setuplang:str="en-US", inputlocale:list=None, systemlocale:str="hu-HU", userlocale:str="hu-HU",
+                        windowsedition:str="Professional",fullname:str="teszt_elek",organization:str=""):
+        if inputlocale is None:
+            inputlocale = ["en-US"]
         pepass=ET.SubElement(self.root,"settings",{"pass":"windowsPE"})
-        # component
-        component=ET.SubElement(pepass, "component",
+        # adds winPE_Core
+        component_winpe=ET.SubElement(pepass, "component",
                       {"name": "Microsoft-Windows-International-Core-WinPE",
                        "processorArchitecture": f"{architecture}",
                        "publicKeyToken": "31bf3856ad364e35",
@@ -22,8 +25,46 @@ class Writer():
                        "versionScope": "nonSxS"
 
                        })
-        ET.SubElement(component,"UILanguage").text=setuplang
-        ET.SubElement(component,"InputLocale").text="040e:0000040e"
+        setupuilang=ET.SubElement(component_winpe,"SetupUILanguage")
+        ET.SubElement(setupuilang,"UILanguage").text=setuplang
+        if len(inputlocale)==1:
+            # https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-international-core-inputlocale
+            ET.SubElement(component_winpe,"InputLocale").text= inputlocale[0]
+        else:
+            #         If multiple keyboard languages are needed, add them separated with commas
+            tmp = "; ".join(inputlocale)
+            ET.SubElement(component_winpe,"InputLocale").text = tmp
+        ET.SubElement(component_winpe,"SystemLocale").text=systemlocale
+        ET.SubElement(component_winpe,"UILanguage").text=setuplang
+        ET.SubElement(component_winpe,"UserLocale").text=userlocale
+        # adds WinPE_Windows_Setup
+        component_winsetup = ET.SubElement(pepass, "component",
+                                        {"name": "Microsoft-Windows-Setup",
+                                         "processorArchitecture": f"{architecture}",
+                                         "publicKeyToken": "31bf3856ad364e35",
+                                         "language": "neutral",
+                                         "versionScope": "nonSxS"
+
+                                         })
+        userdata=ET.SubElement(component_winsetup,"UserData")
+        productkey=ET.SubElement(userdata,"ProductKey")
+        ET.SubElement(productkey,"Key").text=handler.getproductkey(windowsedition)
+        ET.SubElement(productkey,"WillShowUI").text="Never"
+        ET.SubElement(userdata,"AcceptEula").text="true"
+        ET.SubElement(userdata,"FullName").text=fullname
+        ET.SubElement(userdata,"Organization").text=organization
+
+    def add_windows_setup_pass(self):
+        pass
+
+
+
+
+
+
+
+
+
 
     def write(self,filename="autounattendtest.xml"):
         out=ET.tostring(self.root)

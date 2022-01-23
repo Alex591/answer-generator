@@ -50,9 +50,23 @@ def getproductkey(edition: str) -> str:
     return szotar[edition]
 
 
-def inputLocales(language: str) -> str:
+def inputlocales(language: str) -> str:
+    """
+
+    :param language: A language code, such as hu-HU
+    :return:
+    """
     szotar = {
-        "Afrikaans - South Africa": "ddh"
+        "hu-HU": "040e:0000040e",
+        "ro-RO": "0418:00010418",
+        "uk-UA": "0422:00020422",
+        "en-US": "0409:00000409",
+        "pl-PL": "0415:00000415",
+        "en-GB": "0809:00000809",
+        "en-CA": "1009:00000409",
+        "en-IE": "1809:00001809",
+        "de-AT": "0c07:00000407"
+
 
     }
     return szotar[language]
