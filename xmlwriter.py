@@ -54,9 +54,22 @@ class Writer():
         ET.SubElement(userdata,"FullName").text=fullname
         ET.SubElement(userdata,"Organization").text=organization
 
-    def add_windows_setup_pass(self):
-        pass
+    def add_offlineservicing_pass(self,enable_user_acc_control=True):
+        offlinescpass=ET.SubElement(self.root,"settings",{"pass":"offlineServicing"})
 
+    #     User account control
+        component_winsetup = ET.SubElement(offlinescpass, "component",
+                                           {"name": "Microsoft-Windows-Setup",
+                                            "processorArchitecture": "amd64",
+                                            "publicKeyToken": "31bf3856ad364e35",
+                                            "language": "neutral",
+                                            "versionScope": "nonSxS"
+
+                                            })
+        if enable_user_acc_control:
+            ET.SubElement(component_winsetup,"EnableLUA").text="true"
+        else:
+            ET.SubElement(component_winsetup, "EnableLUA").text = "false"
 
 
 
