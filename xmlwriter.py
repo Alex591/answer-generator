@@ -2,6 +2,27 @@ from xml.dom import minidom
 from xml.etree import ElementTree as ET
 import handler
 
+
+class User():
+    def __init__(self,role:str,username:str,password:str):
+        self.__role=role
+        self.__username=username
+        self.__password=password
+    def convertpassword(self,password):
+        pass
+    @property
+    def role(self):
+        return self.__role
+
+    @property
+    def username(self):
+        return self.__username
+    @property
+    def password(self):
+        return self.convertpassword(self.__password)
+
+
+
 class Writer():
     def __init__(self):
         # root element
@@ -117,14 +138,7 @@ class Writer():
         # EnableLUA specifies whether Windows User Account Controls (UAC) notifies the user when programs try to make changes to the computer.
         # UAC was formerly known as Limited User Account (LUA).
         if enable_user_acc_control is not None:
-            component_luasettings = ET.SubElement(offlinescpass, "component",
-                                               {"name": "Microsoft-Windows-LUA-Settings",
-                                                "processorArchitecture": f"{self.architecture}",
-                                                "publicKeyToken": "31bf3856ad364e35",
-                                                "language": "neutral",
-                                                "versionScope": "nonSxS"
-
-                                                })
+            component_luasettings = ET.SubElement(offlinescpass, "component",self.component("Microsoft-Windows-LUA-Settings"))
             if enable_user_acc_control:
                 ET.SubElement(component_luasettings, "EnableLUA").text = "true"
             else:
@@ -151,9 +165,26 @@ class Writer():
 
 
 
-    def add_oobe_pass(self, inputlocale=None | list ):
+    def add_oobe_pass(self, inputlocale=None | list , systemlocale:str="en-US", userlocale:str="hu-HU",setuplang:str="en-US"):
         if inputlocale is None:
             inputlocale = ["en-US"]
+        offlinescpass = ET.SubElement(self.root, "settings", {"pass": "oobeSystem"})
+        #Hide EULA page.Automatically accepted
+        component_wincore = ET.SubElement(offlinescpass, "component", self.component("Microsoft-Windows-International-Core-WinPE"))
+        setupuilang = ET.SubElement(component_wincore, "SetupUILanguage")
+        ET.SubElement(setupuilang, "UILanguage").text = setuplang
+        if len(inputlocale) == 1:
+            # https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-international-core-inputlocale
+            ET.SubElement(component_wincore, "InputLocale").text = inputlocale[0]
+        else:
+            #         If multiple keyboard languages are needed, add them separated with commas
+            tmp = "; ".join(inputlocale)
+            ET.SubElement(component_wincore, "InputLocale").text = tmp
+        ET.SubElement(component_wincore, "SystemLocale").text = systemlocale
+        ET.SubElement(component_wincore, "UILanguage").text = setuplang
+        ET.SubElement(component_wincore, "UserLocale").text = userlocale
+
+
 
 
 
