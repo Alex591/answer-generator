@@ -193,4 +193,5 @@ class Writer():
 x=Writer()
 x.add_win_pe_pass(virtual_machine=True)
 x.add_offlineservicing_pass(enable_user_acc_control=True,enable_code_integrity=True)
+x.add_oobe_pass()
 x.write()
