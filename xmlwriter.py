@@ -21,7 +21,8 @@ class User():
     def password(self):
         return self.convertpassword(self.__password)
 
-
+class PrivacySettings:
+    pass
 
 class Writer():
     def __init__(self):
@@ -165,14 +166,13 @@ class Writer():
 
 
 
-    def add_oobe_pass(self, inputlocale=None | list , systemlocale:str="en-US", userlocale:str="hu-HU",setuplang:str="en-US"):
+    def add_oobe_pass(self,users:list[User], inputlocale: None | list =None  , systemlocale:str="en-US", userlocale:str="hu-HU",setuplang:str="en-US"):
         if inputlocale is None:
             inputlocale = ["en-US"]
-        offlinescpass = ET.SubElement(self.root, "settings", {"pass": "oobeSystem"})
+        oobepass = ET.SubElement(self.root, "settings", {"pass": "oobeSystem"})
         #Hide EULA page.Automatically accepted
-        component_wincore = ET.SubElement(offlinescpass, "component", self.component("Microsoft-Windows-International-Core-WinPE"))
-        setupuilang = ET.SubElement(component_wincore, "SetupUILanguage")
-        ET.SubElement(setupuilang, "UILanguage").text = setuplang
+        component_wincore = ET.SubElement(oobepass, "component", self.component("Microsoft-Windows-International-Core"))
+
         if len(inputlocale) == 1:
             # https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-international-core-inputlocale
             ET.SubElement(component_wincore, "InputLocale").text = inputlocale[0]
@@ -185,6 +185,25 @@ class Writer():
         ET.SubElement(component_wincore, "UserLocale").text = userlocale
 
 
+#         user settings
+        component_shellsetup=ET.SubElement(oobepass,"component",self.component("Microsoft-Windows-Shell-Setup"))
+        useraccounts=ET.SubElement(component_shellsetup,"UserAccounts")
+        localaccounts=ET.SubElement(useraccounts,"LocalAccounts")
+        for x in users:
+            localaccount=ET.SubElement(localaccounts,"LocalAccount",{"wcm:action":"add"})
+            ET.SubElement(localaccount,"Name").text=x.username
+            ET.SubElement(localaccount,"Group").text=x.role
+            passelement=ET.SubElement(localaccount,"Password")
+            ET.SubElement(passelement,"Value").text=x.password
+            ET.SubElement(passelement,"PlainText").text="true"
+
+
+        oobe=ET.SubElement(component_shellsetup,"OOBE")
+        ET.SubElement(oobe,"HideEULAPage").text="true"
+        ET.SubElement(oobe,"HideOEMRegistrationScreen").text="true"
+        ET.SubElement(oobe,"HideWirelessSetupInOOBE").text="true"
+        ET.SubElement(oobe,"ProtectYourPC").text="1"
+
 
 
 
@@ -193,5 +212,7 @@ class Writer():
 x=Writer()
 x.add_win_pe_pass(virtual_machine=True)
 x.add_offlineservicing_pass(enable_user_acc_control=True,enable_code_integrity=True)
-x.add_oobe_pass()
+alexusere=User("Administrators","Csalex","alex")
+alexlistaja=[alexusere]
+x.add_oobe_pass(alexlistaja)
 x.write()
