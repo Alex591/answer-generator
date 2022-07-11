@@ -50,7 +50,7 @@
 			<EnableLUA>true</EnableLUA>
 		</component>
 		<component name="Microsoft-Windows-CodeIntegrity" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-			<SkuPolicyRequired>1</SkuPolicyRequired>
+			<SkuPolicyRequired>0</SkuPolicyRequired>
 		</component>
 	</settings>
 	<settings pass="oobeSystem">
