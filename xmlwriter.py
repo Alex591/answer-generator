@@ -177,7 +177,7 @@ class Writer():
                 ET.SubElement(component_codeintegrity, "SkuPolicyRequired").text = "0"
 
     def add_oobe_pass(self, users: list[User], inputlocale: None | list = None, systemlocale: str = "en-US",
-                      userlocale: str = "hu-HU", setuplang: str = "en-US"):
+                      userlocale: str = "hu-HU", setuplang: str = "en-US",firstlogoncommands:list=[]):
         if inputlocale is None:
             inputlocale = ["en-US"]
         oobepass = ET.SubElement(self.root, "settings", {"pass": "oobeSystem"})
@@ -216,6 +216,13 @@ class Writer():
         ET.SubElement(oobe, "HideOEMRegistrationScreen").text = "true"
         ET.SubElement(oobe, "HideWirelessSetupInOOBE").text = "true"
         ET.SubElement(oobe, "ProtectYourPC").text = "1"
+        #First Logon Commands
+        for priority,x in enumerate(firstlogoncommands):
+            synccommand=ET.SubElement(oobepass,"SynchronousCommand", {"wcm:action": "add"})
+            ET.SubElement(synccommand,"Order").text = str(priority+1)
+            ET.SubElement(synccommand,"Description").text= f"Command Number {priority}"
+            ET.SubElement(synccommand,"RequiresUserInput").text="false"
+            ET.SubElement(synccommand,"CommandLine").text=x
 
 
 
@@ -230,5 +237,5 @@ x.add_offlineservicing_pass(enable_user_acc_control=True, enable_code_integrity=
 alexusere = User("Administrators", "Csalexke", "alex")
 alexmasikusere = User("Users","CsUser","user")
 alexlistaja = [alexusere,alexmasikusere]
-x.add_oobe_pass(alexlistaja)
+x.add_oobe_pass(alexlistaja,firstlogoncommands=['Powershell -command Invoke-WebRequest -Uri "https://chocolatey.org/install.ps1" -OutFile $env:temp\install.ps1','powershell -executionpolicy unrestricted -command Unblock-File $env:temp\install.ps1; powershell -command $env:temp\install.ps1'])
 x.write()

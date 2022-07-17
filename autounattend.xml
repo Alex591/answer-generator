@@ -14,11 +14,10 @@
 			<ImageInstall>
 				<OSImage>
 					<InstallFrom>
-					<Path>install.wim</Path>
-						 <MetaData wcm:action="add">
-                <Key>/IMAGE/NAME</Key>
-                <Value>Windows 11 Pro</Value>
-            </MetaData>
+						<MetaData wcm:action="add">
+							<Key>/image/index</Key>
+							<Value>1</Value>
+						</MetaData>
 					</InstallFrom>
 				</OSImage>
 			</ImageInstall>
@@ -81,6 +80,10 @@
 							<Value/>
 							<PlainText>true</PlainText>
 						</Password>
+						<Themes>
+							<ThemeName/>
+							<DesktopBackground>%WINDIR%\web\wallpaper\valami.png</DesktopBackground>
+						</Themes>
 					</LocalAccount>
 					<LocalAccount wcm:action="add">
 						<Name>CsUser</Name>
@@ -89,6 +92,10 @@
 							<Value/>
 							<PlainText>true</PlainText>
 						</Password>
+						<Themes>
+							<ThemeName/>
+							<DesktopBackground>%WINDIR%\web\wallpaper\valami.png</DesktopBackground>
+						</Themes>
 					</LocalAccount>
 				</LocalAccounts>
 			</UserAccounts>
@@ -99,6 +106,17 @@
 				<ProtectYourPC>1</ProtectYourPC>
 			</OOBE>
 		</component>
+		<SynchronousCommand wcm:action="add">
+			<Order>1</Order>
+			<Description>Command Number 0</Description>
+			<RequiresUserInput>false</RequiresUserInput>
+			<CommandLine>Powershell -command Invoke-WebRequest -Uri &quot;https://chocolatey.org/install.ps1&quot; -OutFile $env:temp\install.ps1</CommandLine>
+		</SynchronousCommand>
+		<SynchronousCommand wcm:action="add">
+			<Order>2</Order>
+			<Description>Command Number 1</Description>
+			<RequiresUserInput>false</RequiresUserInput>
+			<CommandLine>powershell -executionpolicy unrestricted -command Unblock-File $env:temp\install.ps1; powershell -command $env:temp\install.ps1</CommandLine>
+		</SynchronousCommand>
 	</settings>
-	<cpi:offlineImage cpi:source="catalog:c:/users/adama/desktop/install_windows 11 pro.clg" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>
