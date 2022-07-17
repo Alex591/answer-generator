@@ -4,10 +4,11 @@ import handler
 
 
 class User():
-    def __init__(self, role: str, username: str, password: str):
+    def __init__(self, role: str, username: str, password: str,wallpapers:list=[]):
         self.__role = role
         self.__username = username
         self.__password = password
+        self.__wallpaper= wallpapers
 
     def convertpassword(self, password):
         pass
@@ -90,6 +91,15 @@ class Writer():
         component_winsetup = ET.SubElement(pepass, "component",
                                            self.component("Microsoft-Windows-Setup"))
 
+        #This is requires to bypass the inital windows edition screen
+        imageinstall=ET.SubElement(component_winsetup,"ImageInstall")
+        osimage=ET.SubElement(imageinstall,"OSImage")
+        installfrom=ET.SubElement(osimage,"InstallFrom")
+        imagedetails=ET.SubElement(installfrom,"MetaData",{"wcm:action":"add"})
+        ET.SubElement(imagedetails,"Key").text="/image/index"
+        ET.SubElement(imagedetails,"Value").text="1"
+
+        #setting the product key
         userdata = ET.SubElement(component_winsetup, "UserData")
         productkey = ET.SubElement(userdata, "ProductKey")
         ET.SubElement(productkey, "Key").text = handler.getproductkey(windowsedition)
@@ -125,6 +135,7 @@ class Writer():
             ET.SubElement(runcommand_rambypass, "Order").text = '5'
             ET.SubElement(runcommand_rambypass,
                           "Path").text = "reg add HKLM\System\Setup\LabConfig /v BypassRAMCheck /t reg_dword /d 0x00000001 /f"
+        
 
     def add_offlineservicing_pass(self, enable_user_acc_control: None | bool = None,
                                   enable_code_integrity: None | bool = None):
@@ -195,6 +206,10 @@ class Writer():
             passelement = ET.SubElement(localaccount, "Password")
             ET.SubElement(passelement, "Value").text = x.password
             ET.SubElement(passelement, "PlainText").text = "true"
+            #Wallpaper
+            themeparent=ET.SubElement(localaccount,"Themes")
+            themename=ET.SubElement(themeparent,"ThemeName")
+            ET.SubElement(themeparent,"DesktopBackground").text="%WINDIR%\web\wallpaper\\valami.png"
 
         oobe = ET.SubElement(component_shellsetup, "OOBE")
         ET.SubElement(oobe, "HideEULAPage").text = "true"
@@ -206,11 +221,11 @@ class Writer():
 
 #TODO: Disk things
 #TODO: Winget package installs
-
+#TODO: Support for custom files(eg.Wallpapers)
 
 
 x = Writer()
-x.add_win_pe_pass(virtual_machine=True)
+x.add_win_pe_pass(virtual_machine=True,setuplang="hu-HU",inputlocale=["hu-HU"],windowsedition="Professional",systemlocale="hu-HU")
 x.add_offlineservicing_pass(enable_user_acc_control=True, enable_code_integrity=False)
 alexusere = User("Administrators", "Csalexke", "alex")
 alexmasikusere = User("Users","CsUser","user")

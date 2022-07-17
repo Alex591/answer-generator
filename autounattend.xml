@@ -3,14 +3,25 @@
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
 			<SetupUILanguage>
-				<UILanguage>en-US</UILanguage>
+				<UILanguage>hu-HU</UILanguage>
 			</SetupUILanguage>
-			<InputLocale>en-US</InputLocale>
-			<SystemLocale>en-US</SystemLocale>
-			<UILanguage>en-US</UILanguage>
+			<InputLocale>hu-HU</InputLocale>
+			<SystemLocale>hu-HU</SystemLocale>
+			<UILanguage>hu-HU</UILanguage>
 			<UserLocale>hu-HU</UserLocale>
 		</component>
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<ImageInstall>
+				<OSImage>
+					<InstallFrom>
+					<Path>install.wim</Path>
+						 <MetaData wcm:action="add">
+                <Key>/IMAGE/NAME</Key>
+                <Value>Windows 11 Pro</Value>
+            </MetaData>
+					</InstallFrom>
+				</OSImage>
+			</ImageInstall>
 			<UserData>
 				<ProductKey>
 					<Key>W269N-WFGWX-YVC9B-4J6C9-T83GX</Key>
@@ -89,5 +100,5 @@
 			</OOBE>
 		</component>
 	</settings>
-	<cpi:offlineImage xmlns:cpi="urn:schemas-microsoft-com:cpi" cpi:source="wim:c:/users/adama/desktop/install.wim#Windows 10 Pro"/>
+	<cpi:offlineImage cpi:source="catalog:c:/users/adama/desktop/install_windows 11 pro.clg" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>

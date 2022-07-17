@@ -6,8 +6,8 @@ pcname="Alex-pc"
 description="tesztpc"
 language="hu-HU"
 organization= "Organ"
-wallpapers=[]
-fle=open("autounattend.xml","w")
+wallpapers=["valami.png"]
+fle=open("autounattendfkf.xml","w")
 
 
 
