@@ -1,29 +1,8 @@
 from xml.dom import minidom
 from xml.etree import ElementTree as ET
 import handler
+import helper
 
-
-class User():
-    def __init__(self, role: str, username: str, password: str,wallpapers:list=[]):
-        self.__role = role
-        self.__username = username
-        self.__password = password
-        self.__wallpaper= wallpapers
-
-    def convertpassword(self, password):
-        pass
-
-    @property
-    def role(self):
-        return self.__role
-
-    @property
-    def username(self):
-        return self.__username
-
-    @property
-    def password(self):
-        return self.convertpassword(self.__password)
 
 
 class PrivacySettings:
@@ -64,7 +43,7 @@ class Writer():
             f.write(xml_str)
 
     # Pass functions
-    def add_win_pe_pass(self, setuplang: str = "en-US", inputlocale: list | None = None, systemlocale: str = "en-US",
+    def add_win_pe_pass(self,harddrive:str="", setuplang: str = "en-US", inputlocale: list | None = None, systemlocale: str = "en-US",
                         userlocale: str = "hu-HU",
                         windowsedition: str = "Professional", fullname: str = "teszt_elek", organization: str = "",
                         virtual_machine: None | bool = None):
@@ -72,6 +51,8 @@ class Writer():
             inputlocale = ["en-US"]
         pepass = ET.SubElement(self.root, "settings", {"pass": "windowsPE"})
 
+        
+        
         # adds winPE_Core component
         component_winpe = ET.SubElement(pepass, "component",
                                         self.component("Microsoft-Windows-International-Core-WinPE"))
@@ -87,6 +68,9 @@ class Writer():
         ET.SubElement(component_winpe, "SystemLocale").text = systemlocale
         ET.SubElement(component_winpe, "UILanguage").text = setuplang
         ET.SubElement(component_winpe, "UserLocale").text = userlocale
+
+
+
         # adds WinPE_Windows_Setup
         component_winsetup = ET.SubElement(pepass, "component",
                                            self.component("Microsoft-Windows-Setup"))
@@ -176,7 +160,7 @@ class Writer():
             else:
                 ET.SubElement(component_codeintegrity, "SkuPolicyRequired").text = "0"
 
-    def add_oobe_pass(self, users: list[User], inputlocale: None | list = None, systemlocale: str = "en-US",
+    def add_oobe_pass(self, users: list[helper.User], inputlocale: None | list = None, systemlocale: str = "en-US",
                       userlocale: str = "hu-HU", setuplang: str = "en-US",firstlogoncommands:list=[]):
         if inputlocale is None:
             inputlocale = ["en-US"]
@@ -217,8 +201,9 @@ class Writer():
         ET.SubElement(oobe, "HideWirelessSetupInOOBE").text = "true"
         ET.SubElement(oobe, "ProtectYourPC").text = "1"
         #First Logon Commands
+        firstlogon=ET.SubElement(component_shellsetup,"FirstLogonCommands")
         for priority,x in enumerate(firstlogoncommands):
-            synccommand=ET.SubElement(oobepass,"SynchronousCommand", {"wcm:action": "add"})
+            synccommand=ET.SubElement(firstlogon    ,"SynchronousCommand", {"wcm:action": "add"})
             ET.SubElement(synccommand,"Order").text = str(priority+1)
             ET.SubElement(synccommand,"Description").text= f"Command Number {priority}"
             ET.SubElement(synccommand,"RequiresUserInput").text="false"
@@ -234,8 +219,8 @@ class Writer():
 x = Writer()
 x.add_win_pe_pass(virtual_machine=True,setuplang="hu-HU",inputlocale=["hu-HU"],windowsedition="Professional",systemlocale="hu-HU")
 x.add_offlineservicing_pass(enable_user_acc_control=True, enable_code_integrity=False)
-alexusere = User("Administrators", "Csalexke", "alex")
-alexmasikusere = User("Users","CsUser","user")
+alexusere = helper.User("Administrators", "Csalexke", "alex")
+alexmasikusere = helper.User("Users","CsUser","user")
 alexlistaja = [alexusere,alexmasikusere]
-x.add_oobe_pass(alexlistaja,firstlogoncommands=['Powershell -command Invoke-WebRequest -Uri "https://chocolatey.org/install.ps1" -OutFile $env:temp\install.ps1','powershell -executionpolicy unrestricted -command Unblock-File $env:temp\install.ps1; powershell -command $env:temp\install.ps1'])
+x.add_oobe_pass(alexlistaja)
 x.write()
