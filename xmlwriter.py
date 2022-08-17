@@ -10,11 +10,11 @@ class PrivacySettings:
 
 
 class Writer():
-    def __init__(self):
+    def __init__(self,filename:str="autounattend.xml"):
         # root element
         self.root = ET.Element("unattend", {"xmlns": "urn:schemas-microsoft-com:unattend",
                                             "xmlns:wcm": "http://schemas.microsoft.com/WMIConfig/2002/State"})
-
+        self.filename=filename
         # Constants
         self.architecture = "amd64"
 
@@ -33,13 +33,13 @@ class Writer():
                 "versionScope": "nonSxS"
                 }
 
-    def write(self, filename="autounattend.xml"):
+    def write(self):
         out = ET.tostring(self.root)
         dom = minidom.parseString(out)
 
         xml_str = dom.toprettyxml(encoding="utf-8", indent="\t")
 
-        with open(filename, "wb") as f:
+        with open(self.filename, "wb") as f:
             f.write(xml_str)
 
     # Pass functions
@@ -264,15 +264,15 @@ class Writer():
 #TODO: Winget package installs
 #TODO: Support for custom files(eg.Wallpapers)
 
+if __name__ == "__main__":
+    x = Writer()
+    alexusere = helper.User("Administrators", "Csalexke","alex","Ádám Alex")
+    winhdd=helper.HardDrive(True,True)
+    x.add_win_pe_pass(virtual_machine=True,setuplang="hu-HU",inputlocale=["hu-HU"],windowsedition="Professional",systemlocale="hu-HU",fullname=alexusere.fullname,harddrive=[winhdd])
+    x.add_offlineservicing_pass(enable_user_acc_control=True, enable_code_integrity=False)
 
-x = Writer()
-alexusere = helper.User("Administrators", "Csalexke","alex","Ádám Alex")
-winhdd=helper.HardDrive(True,True)
-x.add_win_pe_pass(virtual_machine=True,setuplang="hu-HU",inputlocale=["hu-HU"],windowsedition="Professional",systemlocale="hu-HU",fullname=alexusere.fullname,harddrive=[winhdd])
-x.add_offlineservicing_pass(enable_user_acc_control=True, enable_code_integrity=False)
+    #alexmasikusere = helper.User("Users","CsUser","user")
 
-#alexmasikusere = helper.User("Users","CsUser","user")
-
-alexlistaja = [alexusere]
-x.add_oobe_pass(alexlistaja)
-x.write()
+    alexlistaja = [alexusere]
+    x.add_oobe_pass(alexlistaja)
+    x.write()

@@ -44,6 +44,7 @@
 							<PartitionID>1</PartitionID>
 							<Label>WINRE</Label>
 							<Format>NTFS</Format>
+							<TypeID>DE94BBA4-06D1-4D40-A16A-BFD50179D6AC</TypeID>
 						</ModifyPartition>
 						<ModifyPartition wcm:action="add">
 							<Order>2</Order>
@@ -65,6 +66,14 @@
 					</ModifyPartitions>
 				</Disk>
 			</DiskConfiguration>
+			<ImageInstall>
+				<OSImage>
+					<InstallTo>
+						<DiskID/>
+						<PartitionID>4</PartitionID>
+					</InstallTo>
+				</OSImage>
+			</ImageInstall>
 			<UserData>
 				<ProductKey>
 					<Key>W269N-WFGWX-YVC9B-4J6C9-T83GX</Key>
