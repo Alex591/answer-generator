@@ -78,14 +78,40 @@ class Writer():
         #Disk Configuration!
         #Checking if the harddrive element has elements in it
         #install to id
-        installto=0
+        installto=None
         if harddrive:
             diskconfig=ET.SubElement(component_winsetup,"DiskConfiguration")
+            ET.SubElement(diskconfig,"WillShowUI").text="OnError"
             for index,disk in enumerate(harddrive):
                 disk_add=ET.SubElement(diskconfig,"Disk",{"wcm:action": "add"})
+                ET.SubElement(disk_add,"DiskID").text=str(index)
+                ET.SubElement(disk_add,"WillWipeDisk").text="true"
                 if disk.windowspartition:
-                    index=""
+                    disk.setwinpartition()
+                    installto=index
+                #Creating the partitions
 
+                createpartitions=ET.SubElement(disk_add,"CreatePartitions")
+
+                for partition in disk.partitionlist:
+                    partition_subelement=ET.SubElement(createpartitions,"CreatePartition",{"wcm:action": "add"})
+                    for text,value in partition.createpartition().items():
+                        ET.SubElement(partition_subelement,text).text=value
+                
+                #modifying the partitions
+
+                modifypartitions=ET.SubElement(disk_add,"ModifyPartitions")
+                for partition in disk.partitionlist:
+                    partition_subelement=ET.SubElement(modifypartitions,"ModifyPartition",{"wcm:action": "add"})
+                    for text,value in partition.modifypartition().items():
+                        ET.SubElement(partition_subelement,text).text=value
+        
+        #Where to install the image
+            imginstall=ET.SubElement(component_winsetup,"ImageInstall")
+            osimage=ET.SubElement(imginstall,"OSImage")
+            installto=ET.SubElement(osimage,"InstallTo")
+            ET.SubElement(installto,"DiskID").text=index
+            ET.SubElement(installto,"PartitionID").text="4"
 
 
 
@@ -221,7 +247,7 @@ class Writer():
         ET.SubElement(oobe, "HideEULAPage").text = "true"
         ET.SubElement(oobe, "HideOEMRegistrationScreen").text = "true"
         ET.SubElement(oobe, "HideWirelessSetupInOOBE").text = "true"
-        ET.SubElement(oobe, "ProtectYourPC").text = "1"
+        ET.SubElement(oobe, "ProtectYourPC").text = "3"
         #First Logon Commands
         if firstlogoncommands:
             firstlogon=ET.SubElement(component_shellsetup,"FirstLogonCommands")
@@ -240,12 +266,13 @@ class Writer():
 
 
 x = Writer()
-kincso=helper.User("Administrators","Kincső","aperol")
-x.add_win_pe_pass(virtual_machine=False,setuplang="hu-HU",inputlocale=["hu-HU"],windowsedition="Professional",systemlocale="hu-HU",fullname=kincso.username)
+alexusere = helper.User("Administrators", "Csalexke","alex","Ádám Alex")
+winhdd=helper.HardDrive(True,True)
+x.add_win_pe_pass(virtual_machine=True,setuplang="hu-HU",inputlocale=["hu-HU"],windowsedition="Professional",systemlocale="hu-HU",fullname=alexusere.fullname,harddrive=[winhdd])
 x.add_offlineservicing_pass(enable_user_acc_control=True, enable_code_integrity=False)
-alexusere = helper.User("Administrators", "Csalexke", "alex")
-alexmasikusere = helper.User("Users","CsUser","user")
 
-alexlistaja = [kincso]
+#alexmasikusere = helper.User("Users","CsUser","user")
+
+alexlistaja = [alexusere]
 x.add_oobe_pass(alexlistaja)
 x.write()
