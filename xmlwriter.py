@@ -260,7 +260,6 @@ class Writer():
 
 
 
-#TODO: Disk things
 #TODO: Winget package installs
 #TODO: Support for custom files(eg.Wallpapers)
 

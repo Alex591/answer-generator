@@ -8,11 +8,13 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
+from cgitb import handler
 from fileinput import filename
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 import helper
+import handler
 import xmlwriter
 
 class Ui_MainWindow(object):
@@ -25,7 +27,12 @@ class Ui_MainWindow(object):
         answerfile.add_oobe_pass(alexlistaja)
         answerfile.write()
 
-
+    def addwineditions(self,combobox:QComboBox)->None:
+        editions=["Windows 10","Windows 11"]
+        variations=handler.getwindowseditions().keys()
+        for edition in editions:
+            for variation in variations:
+                combobox.addItem(f"{edition} {variation}")
 
 
 
@@ -141,7 +148,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-
+        self.addwineditions(self.comboBox)
         self.pushButton.clicked.connect(self.good)
 
 
