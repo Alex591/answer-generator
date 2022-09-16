@@ -1,5 +1,5 @@
 
-import win32api
+
 
 
 
@@ -58,6 +58,11 @@ def getproductkey(edition: str) -> str:
 
     return szotar[edition]
 
+def alllanguages()->list:
+    """
+    
+    """
+    return ["Hungarian","English"]
 
 def inputlocales(language: str) -> str:
     """
@@ -90,9 +95,7 @@ def powerplan(name: str) -> str:
     return powerlevels[name.lower()]
 
 
-def getdriveletters()->list:
-    drives = win32api.GetLogicalDriveStrings()
-    return drives.split('\000')[:-1]
+
 
 
 if __name__ == '__main__':

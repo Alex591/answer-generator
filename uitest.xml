@@ -17,7 +17,7 @@
 					<WillShowUI>Never</WillShowUI>
 				</ProductKey>
 				<AcceptEula>true</AcceptEula>
-				<FullName>dd dd</FullName>
+				<FullName>njknkj</FullName>
 				<Organization/>
 			</UserData>
 		</component>
@@ -42,7 +42,7 @@
 			<UserAccounts>
 				<LocalAccounts>
 					<LocalAccount wcm:action="add">
-						<Name>ddd</Name>
+						<Name>nnkj</Name>
 						<Group>Administrators</Group>
 						<Password>
 							<Value>teest</Value>
@@ -57,7 +57,7 @@
 					<PlainText>true</PlainText>
 				</Password>
 				<Enabled>false</Enabled>
-				<Username>ddd</Username>
+				<Username>nnkj</Username>
 			</AutoLogon>
 			<OOBE>
 				<HideEULAPage>true</HideEULAPage>
