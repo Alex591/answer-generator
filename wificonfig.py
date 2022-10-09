@@ -1,4 +1,6 @@
 # Generates Wi-Fi configuration files
+import os.path
+import shutil
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
 import secrets
@@ -19,7 +21,7 @@ class WifiNetwork():
         self.__encryption = encryption
         self.__macrandomization=macrandomization
         self.__root = ET.Element("WLANProfile", {"xmlns": "http://www.microsoft.com/networking/WLAN/profile/v1"})
-        self.create()
+        self.createconfigs()
 
     @staticmethod
     def tohex(to_convert: str):
@@ -41,6 +43,11 @@ class WifiNetwork():
 
         with open(filename, "wb") as f:
             f.write(xml_str)
+        currentdir=os.path.join(os.getcwd(),filename)
+        destination=os.path.join(os.getcwd(),"$OEM$",filename)
+        destinationdir=os.path.join(os.getcwd(),"$OEM$")
+        os.makedirs(destinationdir,exist_ok=True)
+        shutil.move(currentdir,destination)
     @staticmethod
     def macseed() -> int:
         """
@@ -52,7 +59,7 @@ class WifiNetwork():
         secretsgen = secrets.SystemRandom()
         return secretsgen.randrange(1000000000,9999999999)
 
-    def create(self):
+    def createconfigs(self):
         ET.SubElement(self.__root, 'name').text = self.__networkname
         # SSID Config
         ssidconfig = ET.SubElement(self.__root, "SSIDConfig")
@@ -65,10 +72,10 @@ class WifiNetwork():
 
         # Security
         security = ET.SubElement(msm, "security")
-        authEncryption = ET.SubElement(security, "authEncryption")
-        ET.SubElement(authEncryption, "authentication").text = self.__authentication
-        ET.SubElement(authEncryption, "encryption").text = self.__encryption
-        ET.SubElement(authEncryption, "useOneX").text = "false"
+        auth_encryption = ET.SubElement(security, "auth_encryption")
+        ET.SubElement(auth_encryption, "authentication").text = self.__authentication
+        ET.SubElement(auth_encryption, "encryption").text = self.__encryption
+        ET.SubElement(auth_encryption, "useOneX").text = "false"
         # if a password is needed
         if self.__password is not None:
             sharedkey=ET.SubElement(security,"sharedKey")
@@ -81,9 +88,29 @@ class WifiNetwork():
         ET.SubElement(macrandom,"enableRandomization").text= "false" if self.__macrandomization is None or False else "true"
         ET.SubElement(macrandom,"randomizationSeed").text=str(self.macseed())
 
+    @property
+    def networkname(self):
+        return self.__networkname
+    @staticmethod
+    def createcmd(networks:list)->None:
+        with open("wifi.cmd","w") as f:
+            for network in networks:
+                if isinstance(network,WifiNetwork):
+                    print(f'netsh wlan add profile filename="C:\Wi-Fi-{network.networkname}.xml"',file=f)
+
+        currentfile = os.path.join(os.getcwd(), "wifi.cmd")
+        destinationdir=os.path.join(os.getcwd(),"$OEM$")
+        os.makedirs(destinationdir,exist_ok=True)
+        destfile=os.path.join(destinationdir,"wifi.cmd")
+        shutil.move(currentfile,destfile)
+        pass
+
+
+
 
 if __name__=="__main__":
-    tesztwifi=WifiNetwork("NET","none","open")
+    tesztwifi=WifiNetwork("NET5","none","open")
     tesztwifi.write()
     masikteszt=WifiNetwork("vgfgth","AES","WPA2PSK","fgftuzhgghvgh")
     masikteszt.write()
+    WifiNetwork.createcmd([tesztwifi,masikteszt])

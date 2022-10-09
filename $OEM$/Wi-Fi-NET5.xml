@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WLANProfile xmlns="http://www.microsoft.com/networking/WLAN/profile/v1">
+	<name>NET5</name>
+	<SSIDConfig>
+		<SSID>
+			<hex>4e455435</hex>
+			<name>NET5</name>
+		</SSID>
+	</SSIDConfig>
+	<connectionType>ESS</connectionType>
+	<connectionMode>auto</connectionMode>
+	<MSM>
+		<security>
+			<auth_encryption>
+				<authentication>open</authentication>
+				<encryption>none</encryption>
+				<useOneX>false</useOneX>
+			</auth_encryption>
+		</security>
+	</MSM>
+	<MacRandomization xmlns="http://www.microsoft.com/networking/WLAN/profile/v3">
+		<enableRandomization>false</enableRandomization>
+		<randomizationSeed>9377800100</randomizationSeed>
+	</MacRandomization>
+</WLANProfile>

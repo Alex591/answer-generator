@@ -66,10 +66,6 @@ def alllanguages()->list:
 
     :return: a list of language names
     """
-    
-
-
-
     return ["Hungarian","English (United Kingdom)","English (United States)","English (Canada)","Ukrainian","Romanian"]
 
 def inputlocales(language: str) -> str:
@@ -103,9 +99,8 @@ def powerplan(name: str) -> str:
     return powerlevels[name.lower()]
 
 
-def getdriveletters()->list:
-    available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
-    return available_drives
+
+
 
 
 if __name__ == '__main__':
