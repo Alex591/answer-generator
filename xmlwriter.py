@@ -43,10 +43,12 @@ class Writer():
             f.write(xml_str)
 
     # Pass functions
-    def add_win_pe_pass(self,harddrive:list[helper.HardDrive]=[], setuplang: str = "en-US", inputlocale: list | None = None, systemlocale: str = "en-US",
+    def add_win_pe_pass(self,harddrive:list[helper.HardDrive]=None, setuplang: str = "en-US", inputlocale: list | None = None, systemlocale: str = "en-US",
                         userlocale: str = "hu-HU",
                         windowsedition: str = "Professional", fullname: str = "teszt_elek", organization: str = "",
                         virtual_machine: None | bool = None):
+        if harddrive is None:
+            harddrive=[]
         if inputlocale is None:
             inputlocale = ["en-US"]
         pepass = ET.SubElement(self.root, "settings", {"pass": "windowsPE"})
@@ -261,7 +263,7 @@ class Writer():
 
 
 #TODO: Winget package installs
-#TODO: Support for custom files(eg.Wallpapers)
+
 
 if __name__ == "__main__":
     x = Writer()

@@ -16,7 +16,7 @@ from PySide6.QtWidgets import *
 import helper
 import handler
 import xmlwriter
-from qt_material import apply_stylesheet
+
 
 
 
@@ -57,6 +57,11 @@ class Ui_WindowsAnswerfile(object):
         langs=handler.alllanguages()
         for lang in langs:
             combobox.addItem(lang)
+
+
+    def run(self):
+        pass
+
 
 
     def setupUi(self, WindowsAnswerfile):

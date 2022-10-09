@@ -1,5 +1,6 @@
 
-
+import string
+import os
 
 
 
@@ -60,9 +61,16 @@ def getproductkey(edition: str) -> str:
 
 def alllanguages()->list:
     """
-    
+    Returns the most commonly used languages for the region.
+    It does not include all languages to avoid clutter.
+
+    :return: a list of language names
     """
-    return ["Hungarian","English"]
+    
+
+
+
+    return ["Hungarian","English (United Kingdom)","English (United States)","English (Canada)","Ukrainian","Romanian"]
 
 def inputlocales(language: str) -> str:
     """
@@ -95,7 +103,9 @@ def powerplan(name: str) -> str:
     return powerlevels[name.lower()]
 
 
-
+def getdriveletters()->list:
+    available_drives = ['%s:' % d for d in string.ascii_uppercase if os.path.exists('%s:' % d)]
+    return available_drives
 
 
 if __name__ == '__main__':
