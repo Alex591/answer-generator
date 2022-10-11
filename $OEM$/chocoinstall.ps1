@@ -13,7 +13,7 @@ function Install-Chocolatey {
         Write-Warning 'Unable to set PowerShell to use TLS 1.2. This is required for contacting Chocolatey as of 03 FEB 2020. https://chocolatey.org/blog/remove-support-for-old-tls-versions. If you see underlying connection closed or trust errors, you may need to do one or more of the following: (1) upgrade to .NET Framework 4.5+ and PowerShell v3+, (2) Call [System.Net.ServicePointManager]::SecurityProtocol = 3072; in PowerShell prior to attempting installation, (3) specify internal Chocolatey package location (set $env:chocolateyDownloadUrl prior to install or host the package internally), (4) use the Download + PowerShell method of install. See https://chocolatey.org/docs/installation for all install options.'
     }
 
-    # Chocolatey is used to install softwares in the VM.
+    # Chocolatey is used to install softwares.
     $installationScriptBlock = [Scriptblock]::Create((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
     Invoke-Command -ScriptBlock $installationScriptBlock
 
@@ -22,10 +22,8 @@ function Install-Chocolatey {
     
 }
 
-function InstallPrograms {
-    choco install djiuehde -y
-}
 
-
+Install-Chocolatey
 
 refreshenv
+

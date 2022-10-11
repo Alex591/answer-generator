@@ -24,9 +24,39 @@
   </property>
   <property name="palette">
    <palette>
-    <active/>
-    <inactive/>
-    <disabled/>
+    <active>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>240</red>
+        <green>240</green>
+        <blue>240</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
    </palette>
   </property>
   <property name="font">
@@ -58,14 +88,13 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>430</y>
+      <y>470</y>
       <width>181</width>
       <height>61</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable</family>
       <pointsize>-1</pointsize>
       <underline>false</underline>
       <strikeout>false</strikeout>
@@ -101,7 +130,7 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>350</y>
+      <y>400</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -135,7 +164,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>350</y>
+      <y>400</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -168,11 +197,23 @@
    <widget class="QCheckBox" name="vm_checkBox">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>80</y>
-      <width>151</width>
+      <x>260</x>
+      <y>340</y>
+      <width>171</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display Semib</family>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="mouseTracking">
      <bool>true</bool>
@@ -187,7 +228,7 @@
      <string notr="true"/>
     </property>
     <property name="text">
-     <string/>
+     <string>Virtual Machine</string>
     </property>
     <property name="tristate">
      <bool>false</bool>
@@ -204,9 +245,8 @@
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
-      <bold>true</bold>
+      <family>Segoe UI Variable Display</family>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
@@ -215,7 +255,10 @@
 border: 1px solid #d3d3d3;
 border-radius: 4px;
 padding-left: 10px;
-background-color: rgb(250, 250, 250);
+background-color: rgb(254, 254, 254)
+}
+#win_edition_combo:hover{
+background-color: rgb(250, 250, 250)
 }
 /*Dropdown area */
 #win_edition_combo::drop-down{
@@ -230,9 +273,24 @@ image: url(:/ComboBox/img dark/ComboBoxDisabled.png)
 border: 2px solid #c2dbfe
 }
 
-</string>
+/*listitems*/
+#win_edition_combo QListView{
+	font-size: 9px;
+	padding: 5px;
+	border: 1px solid #d3d3d3;
+	background-color: rgb(250, 250, 250);
+	outline: 0px;
+
+}
+#win_edition_combo QListView::item{
+	padding-left: 10px;
+	background-color: rgb(250, 250, 250);
+}
+#win_edition_combo QListView:item:hover{
+	background-color: #f3f3f3
+}</string>
     </property>
-    <property name="placeholderText" stdset="0">
+    <property name="placeholderText">
      <string>Windows 11 Pro</string>
     </property>
     <item>
@@ -257,10 +315,14 @@ border: 2px solid #c2dbfe
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QLabel {
+background-color: #fbfbfb
+}
+</string>
     </property>
     <property name="text">
      <string>Windows Edition</string>
@@ -269,16 +331,14 @@ border: 2px solid #c2dbfe
    <widget class="QCheckBox" name="hdd_checkbox">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>260</y>
+      <x>260</x>
+      <y>310</y>
       <width>211</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -290,47 +350,31 @@ border: 2px solid #c2dbfe
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>120</y>
+      <y>90</y>
       <width>111</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QLabel {
+background-color: #fbfbfb
+}
+</string>
     </property>
     <property name="text">
      <string>Windows Language</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>80</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Virtual Machine</string>
     </property>
    </widget>
    <widget class="QComboBox" name="win_language_combobox">
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>120</y>
+      <y>90</y>
       <width>231</width>
       <height>22</height>
      </rect>
@@ -341,7 +385,10 @@ border: 2px solid #c2dbfe
 border: 1px solid #d3d3d3;
 border-radius: 4px;
 padding-left: 10px;
-background-color: rgb(250, 250, 250);
+background-color: rgb(254, 254, 254)
+}
+#win_language_combobox:hover{
+background-color: rgb(250, 250, 250)
 }
 /*Dropdown area */
 #win_language_combobox::drop-down{
@@ -356,22 +403,35 @@ image: url(:/ComboBox/img dark/ComboBoxDisabled.png)
 border: 2px solid #c2dbfe
 }
 
-</string>
+/*listitems*/
+#win_language_combobox QListView{
+	font-size: 9px;
+	padding: 5px;
+	border: 1px solid #d3d3d3;
+	background-color: rgb(250, 250, 250);
+	outline: 0px;
+
+}
+#win_language_combobox QListView::item{
+	padding-left: 10px;
+	background-color: rgb(250, 250, 250);
+}
+#win_language_combobox QListView:item:hover{
+	background-color: #f3f3f3
+}</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>260</y>
+      <x>40</x>
+      <y>310</y>
       <width>101</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -382,8 +442,8 @@ border: 2px solid #c2dbfe
    <widget class="QCheckBox" name="uac_checkbox">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>260</y>
+      <x>170</x>
+      <y>310</y>
       <width>31</width>
       <height>20</height>
      </rect>
@@ -410,16 +470,14 @@ border: 2px solid #c2dbfe
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>290</y>
+      <x>40</x>
+      <y>340</y>
       <width>121</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -430,8 +488,8 @@ border: 2px solid #c2dbfe
    <widget class="QCheckBox" name="codeintegrity_checkbox">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>290</y>
+      <x>170</x>
+      <y>340</y>
       <width>31</width>
       <height>20</height>
      </rect>
@@ -459,27 +517,42 @@ border: 2px solid #c2dbfe
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>160</y>
+      <y>130</y>
       <width>231</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QLineEdit {
+border: 1px solid #d3d3d3;
+border-radius: 4px;
+padding-left: 10px;
+background-color: rgb(254, 254, 254)
+}
+.QLineEdit:hover{
+background-color: rgb(250, 250, 250)
+}</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>160</y>
+      <y>130</y>
       <width>101</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QLabel {
+background-color: #fbfbfb
+}
+</string>
     </property>
     <property name="text">
      <string>Computer Name</string>
@@ -489,32 +562,86 @@ border: 2px solid #c2dbfe
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>200</y>
+      <y>170</y>
       <width>231</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QLineEdit {
+border: 1px solid #d3d3d3;
+border-radius: 4px;
+padding-left: 10px;
+background-color: rgb(254, 254, 254)
+}
+.QLineEdit:hover{
+background-color: rgb(250, 250, 250)
+}</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>200</y>
+      <y>170</y>
       <width>111</width>
       <height>16</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Segoe UI Variable Display Semib</family>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QLabel {
+background-color: #fbfbfb
+}
+</string>
     </property>
     <property name="text">
      <string>Organization Name</string>
     </property>
    </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>20</y>
+      <width>421</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+   </widget>
+   <zorder>groupBox</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>user_edit_button</zorder>
+   <zorder>program_edit_button</zorder>
+   <zorder>vm_checkBox</zorder>
+   <zorder>win_edition_combo</zorder>
+   <zorder>label</zorder>
+   <zorder>hdd_checkbox</zorder>
+   <zorder>label_2</zorder>
+   <zorder>win_language_combobox</zorder>
+   <zorder>label_4</zorder>
+   <zorder>uac_checkbox</zorder>
+   <zorder>label_5</zorder>
+   <zorder>codeintegrity_checkbox</zorder>
+   <zorder>lineEdit</zorder>
+   <zorder>label_6</zorder>
+   <zorder>lineEdit_2</zorder>
+   <zorder>label_7</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
