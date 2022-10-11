@@ -86,7 +86,7 @@ class Writer():
             ET.SubElement(diskconfig,"WillShowUI").text="OnError"
             for index,disk in enumerate(harddrive):
                 disk_add=ET.SubElement(diskconfig,"Disk",{"wcm:action": "add"})
-                ET.SubElement(disk_add,"DiskID").text=str(index)
+                ET.SubElement(disk_add,"DiskID").text="0"
                 ET.SubElement(disk_add,"WillWipeDisk").text="true"
                 if disk.windowspartition:
                     disk.setwinpartition()
@@ -271,7 +271,7 @@ if __name__ == "__main__":
     winhdd=helper.HardDrive(True,True)
     x.add_win_pe_pass(virtual_machine=True,setuplang="hu-HU",inputlocale=["hu-HU"],windowsedition="Professional",systemlocale="hu-HU",fullname=alexusere.fullname,harddrive=[winhdd])
     x.add_offlineservicing_pass(enable_user_acc_control=True, enable_code_integrity=False)
-
+    
     #alexmasikusere = helper.User("Users","CsUser","user")
 
     alexlistaja = [alexusere]
