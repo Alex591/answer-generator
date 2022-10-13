@@ -24,6 +24,6 @@ function Install-Chocolatey {
 
 
 Install-Chocolatey
-
+choco install firefox -y
 refreshenv
 
