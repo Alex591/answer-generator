@@ -20,6 +20,14 @@ from PySide6.QtWidgets import (QAbstractButton, QApplication, QCheckBox, QDialog
     QSizePolicy, QWidget)
 
 class Ui_Dialog(object):
+
+    def powershell(self):
+        """
+        Makes the powershell script.
+        :return:
+        """
+    pass
+
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
@@ -34,7 +42,7 @@ class Ui_Dialog(object):
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
         self.label = QLabel(Dialog)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(30, 160, 91, 21))
+        self.label.setGeometry(QRect(30, 160, 101, 21))
         font = QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -344,7 +352,6 @@ class Ui_Dialog(object):
         self.groupBox_7.raise_()
         self.groupBox_8.raise_()
         self.groupBox_9.raise_()
-
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept)
         self.buttonBox.rejected.connect(Dialog.reject)

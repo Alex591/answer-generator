@@ -25,6 +25,12 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">.QCheckBox::indicator {
+     width: 14px;
+     height: 14px;
+ }</string>
+  </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
@@ -49,7 +55,7 @@
     <rect>
      <x>30</x>
      <y>160</y>
-     <width>91</width>
+     <width>101</width>
      <height>21</height>
     </rect>
    </property>
@@ -274,7 +280,7 @@ background-color: #fbfbfb
      <x>10</x>
      <y>280</y>
      <width>131</width>
-     <height>231</height>
+     <height>251</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -477,6 +483,25 @@ background-color: #fbfbfb
     </property>
     <property name="text">
      <string>Java JRE Runtime</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="jre8_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>220</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font/>
+    </property>
+    <property name="toolTip">
+     <string>Programming Language</string>
+    </property>
+    <property name="text">
+     <string>Oracle Virtualbox</string>
     </property>
    </widget>
   </widget>

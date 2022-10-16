@@ -1,21 +1,31 @@
 
 
 
-from ast import Str
-
+import shutil
+import os
 
 class Program:
     """
     Describes a program to be installed
     """
     programname:str
-    packageman:str
+    __packageman:str|None
+    __installflags:str|None
+    installstring:str
+    __winget:bool
+
     def __init__(self,programname):
+        self.__winget=False
         self.programname=programname
         self.__packageman=None
         self.__installflags=None
         self.programname=self.fixlines(self.programname)
-        self.__winget=False
+        self.programnamed= self.determineprogramname(self.programname)
+        self.determineinstallflags()
+
+        self.installstring=f"{'winget' if self.winget else 'choco'} install {self.programnamed} {self.__installflags}"
+
+
         
     def fixlines(self,old:str)->str:
         return old.replace("1","-")
@@ -25,36 +35,26 @@ class Program:
         "spotify":"Spotify.Spotify","ubisoft-connect":"Ubisoft.Connect","steam":"Valve.Steam","origin":"ElectronicArts.EADesktop",
         "epicgameslauncher":"EpicGames.EpicGamesLauncher","winrar":"RARLab.WinRAR","itunes":"Apple.iTunes","vlc":"VideoLAN.VLC",
         "plex":"Plex.Plex","powertoys":"Microsoft.PowerToys"}
-        if program in ["instagram","whatsapp","netflix","disneyplus"]:
+        if program in wingetdict.keys():
             self.__winget=True
-            if program=="instagram":
-                return "9NBLGGH5L9XT"
-            elif program=="whatsapp":
-                return "9NKSQGP7F2NH"
-            elif program=="netflix":
-                return "9WZDNCRFJ3TJ"
-            elif program == "disneyplus":
-                return "9NXQXXLFST89"
-       
+            print(wingetdict[program])
+            return wingetdict[program]
         else:
             return program
-    def determinepackageman()->str:
-        
 
 
 
-
-        pass
-
-
-    def determineinstallflags()->str:
-        pass
+    def determineinstallflags(self)->None:
+        self.__installflags="--accept-package-agreements --accept-source-agreements" if self.winget else "-y"
     @property
     def packageman(self)->str:
         return self.__packageman
     @property
     def installflag(self)->str:
         return self.__installflags
+    @property
+    def winget(self):
+        return self.__winget
 
 
 
@@ -64,6 +64,7 @@ class PowershellScript():
     """
     def __init__(self):
         self.wingetrequired=False
+        self.scriptbody=""
     
 
     def installchoco(self)->str:
@@ -98,3 +99,32 @@ function Install-Chocolatey {
         Invoke-WebRequest -Uri "https://github.com/microsoft/winget-cli/releases/download/v1.1.12653/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -OutFile "C:\PS\WinGet.msixbundle"
 Add-AppxPackage "C:\PS\WinGet.msixbundle"
         """
+        return wingetinstall
+
+
+def make_and_move(programs:list[Program]):
+    """
+    Function intended to be used by the UI to make the complete powershell script
+    :param programs: a list of programs
+    :return: None,this writes a powershell script to $OEM$\\$1
+    """
+    psscript=PowershellScript()
+    psscript.scriptbody=psscript.scriptbody+psscript.installchoco()
+    for x in programs:
+        if x.winget:
+            psscript.scriptbody=psscript.scriptbody+psscript.installwinget()
+
+    for x in programs:
+        psscript.scriptbody=psscript.scriptbody+"\n"+x.installstring
+    with open("chocoinstall.ps1","w") as file:
+        print(psscript.scriptbody,file=file)
+    originaldir = os.path.join(os.getcwd(),"chocoinstall.ps1")
+    destdir= os.path.join(os.getcwd(),"$OEM$","chocoinstall.ps1")
+    shutil.move(originaldir,destdir)
+
+
+if __name__=="__main__":
+    test=Program("netflix")
+    test2=Program("oracle1sql1developer")
+    print(test.installstring)
+    make_and_move([test,test2])
