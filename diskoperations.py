@@ -27,12 +27,12 @@ def delete_from_dir(directory:str)->None:
 
 def copy_to_oem_folder(driveletter:str):
     """
-    Copies the contents of the directory to_copy to %driveletter%/sources/$OEM$
+    Copies the contents of the directory to_copy to %driveletter%/sources/$OEM$/$1
     :param driveletter: Drive letter to copy to
     :return:
     """
     originaldir = os.path.join(os.getcwd(), "$OEM$")
-    destinationdir= os.path.join(driveletter,"sources")
+    destinationdir= os.path.join(driveletter,"sources","$OEM$","$1")
 
     #First we create the directory
     os.makedirs(destinationdir,exist_ok=True)

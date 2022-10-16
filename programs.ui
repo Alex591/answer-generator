@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>513</width>
-    <height>399</height>
+    <width>518</width>
+    <height>657</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>360</y>
+     <x>40</x>
+     <y>620</y>
      <width>451</width>
      <height>32</height>
     </rect>
@@ -35,11 +35,19 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>40</y>
-     <width>81</width>
-     <height>16</height>
+     <x>30</x>
+     <y>160</y>
+     <width>91</width>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI Semibold</family>
+     <pointsize>11</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>Web Browsers</string>
@@ -48,8 +56,8 @@
   <widget class="QCheckBox" name="googlechrome">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>70</y>
+     <x>30</x>
+     <y>200</y>
      <width>91</width>
      <height>17</height>
     </rect>
@@ -58,6 +66,9 @@
     <font>
      <family>Segoe UI Variable Display</family>
     </font>
+   </property>
+   <property name="toolTip">
+    <string>Web Browser by Google</string>
    </property>
    <property name="text">
     <string>Google Chrome</string>
@@ -66,8 +77,8 @@
   <widget class="QCheckBox" name="firefox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>90</y>
+     <x>30</x>
+     <y>220</y>
      <width>91</width>
      <height>17</height>
     </rect>
@@ -76,6 +87,9 @@
     <font>
      <family>Segoe UI Variable Display</family>
     </font>
+   </property>
+   <property name="toolTip">
+    <string>Privacy focused Browser</string>
    </property>
    <property name="text">
     <string>Mozilla Firefox</string>
@@ -84,8 +98,8 @@
   <widget class="QCheckBox" name="opera">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>110</y>
+     <x>30</x>
+     <y>240</y>
      <width>91</width>
      <height>17</height>
     </rect>
@@ -95,144 +109,1075 @@
      <family>Segoe UI Variable Display</family>
     </font>
    </property>
+   <property name="toolTip">
+    <string>Browser with built-in VPN</string>
+   </property>
    <property name="text">
     <string>Opera</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>140</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Developer Tools</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="pycharm">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>170</y>
-     <width>101</width>
-     <height>17</height>
+     <x>-20</x>
+     <y>10</y>
+     <width>531</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Segoe UI Variable Display</family>
+     <family>Segoe UI Variable Display Semib</family>
+     <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
-    <string>Jetbrains Pycharm</string>
+    <string>Programs</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QCheckBox" name="vscode">
+  <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>190</y>
-     <width>111</width>
-     <height>17</height>
+     <x>10</x>
+     <y>10</y>
+     <width>501</width>
+     <height>131</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI Variable Display</family>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
    </property>
-   <property name="text">
-    <string>Visual Studion Code</string>
+   <property name="title">
+    <string/>
    </property>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>471</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display Light</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QLabel {
+background-color: #fbfbfb;
+	color: rgb(0, 70, 124);
+}
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="text">
+     <string>Note: Requires an Internet connection</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>481</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display Light</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QLabel {
+background-color: #fbfbfb;
+}
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="text">
+     <string>You can add programs the with a help of a startup script will be preinstalled on your device.</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::RichText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
-  <widget class="QCheckBox" name="opera_4">
+  <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>210</y>
-     <width>111</width>
-     <height>17</height>
+     <x>10</x>
+     <y>150</y>
+     <width>131</width>
+     <height>121</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI Variable Display</family>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
    </property>
-   <property name="text">
-    <string>Java JDK</string>
+   <property name="title">
+    <string/>
    </property>
   </widget>
-  <widget class="QCheckBox" name="python">
+  <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>230</y>
-     <width>111</width>
-     <height>17</height>
+     <x>10</x>
+     <y>280</y>
+     <width>131</width>
+     <height>231</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI Variable Display</family>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
    </property>
-   <property name="text">
-    <string>Python</string>
+   <property name="title">
+    <string/>
    </property>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Semibold</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Developer Tools</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="python">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Programming Language</string>
+    </property>
+    <property name="text">
+     <string>Python</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="pycharm">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Python IDE</string>
+    </property>
+    <property name="text">
+     <string>Pycharm</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="vscode">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Free code editor by Microsoft</string>
+    </property>
+    <property name="text">
+     <string>VS Code</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="oraclejdk">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Java Development Kit</string>
+    </property>
+    <property name="text">
+     <string>Java JDK</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="notepadplusplus">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Programming Language</string>
+    </property>
+    <property name="text">
+     <string>Notepad++</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="putty">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Programming Language</string>
+    </property>
+    <property name="text">
+     <string>PuTTY</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="eclipse">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>160</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Programming Language</string>
+    </property>
+    <property name="text">
+     <string>Eclipse</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="oracle1sql1developer">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>180</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Programming Language</string>
+    </property>
+    <property name="text">
+     <string>SQL Developer</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="jre8">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Programming Language</string>
+    </property>
+    <property name="text">
+     <string>Java JRE Runtime</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QGroupBox" name="groupBox_4">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>260</y>
-     <width>81</width>
-     <height>16</height>
+     <x>190</x>
+     <y>150</y>
+     <width>131</width>
+     <height>121</height>
     </rect>
    </property>
-   <property name="text">
-    <string>File Sharing</string>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
    </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QCheckBox" name="transmission">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Transmission</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>131</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Semibold</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>File Sharing</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="qbittorent">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>111</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>qbittorent</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QCheckBox" name="qbittorent">
+  <widget class="QGroupBox" name="groupBox_5">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>290</y>
-     <width>111</width>
-     <height>17</height>
+     <x>190</x>
+     <y>280</y>
+     <width>131</width>
+     <height>171</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI Variable Display</family>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
    </property>
-   <property name="text">
-    <string>qbittorent</string>
+   <property name="title">
+    <string/>
    </property>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>131</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Semibold</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Socials</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="zoom">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Python IDE</string>
+    </property>
+    <property name="text">
+     <string>Zoom</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="discord">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Python IDE</string>
+    </property>
+    <property name="text">
+     <string>Discord</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="skype">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Python IDE</string>
+    </property>
+    <property name="text">
+     <string>Skype</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="thunderbird">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Python IDE</string>
+    </property>
+    <property name="text">
+     <string>Teams</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="instagram">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Python IDE</string>
+    </property>
+    <property name="text">
+     <string>Instagram</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="whatsapp">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Python IDE</string>
+    </property>
+    <property name="text">
+     <string>Whatsapp</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QCheckBox" name="transmission">
+  <widget class="QGroupBox" name="groupBox_6">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>310</y>
-     <width>111</width>
-     <height>17</height>
+     <x>370</x>
+     <y>150</y>
+     <width>120</width>
+     <height>121</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI Variable Display</family>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
    </property>
-   <property name="text">
-    <string>Transmission</string>
+   <property name="title">
+    <string/>
    </property>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Semibold</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Streaming</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="netflix">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Netflix</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="spotify">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Spotify</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="qbittorent_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Disney+</string>
+    </property>
+   </widget>
   </widget>
+  <widget class="QGroupBox" name="groupBox_7">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>280</y>
+     <width>120</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Semibold</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Gaming</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="ubisoft1connect">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Ubisoft Connect</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="origin">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Origin</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="epicgameslauncher">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Epic Games</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Steam">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Steam</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_8">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>460</y>
+     <width>131</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>131</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Semibold</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Office</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="thunderbird_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>101</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Python IDE</string>
+    </property>
+    <property name="text">
+     <string>Office 365</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_9">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>420</y>
+     <width>120</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">.QGroupBox {
+border: 1px solid #e5e5e5;
+border-radius: 6px;
+background-color: #fbfbfb
+}
+</string>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Semibold</family>
+      <pointsize>11</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Other</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="ubisoft1connect_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>WinRAR</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="itunes">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>iTunes</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="vlc">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>VLC</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="plex">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>Plex</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="plex_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Display</family>
+     </font>
+    </property>
+    <property name="text">
+     <string>PowerToys</string>
+    </property>
+   </widget>
+  </widget>
+  <zorder>groupBox_3</zorder>
+  <zorder>groupBox_2</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>buttonBox</zorder>
+  <zorder>label</zorder>
+  <zorder>googlechrome</zorder>
+  <zorder>firefox</zorder>
+  <zorder>opera</zorder>
+  <zorder>label_4</zorder>
+  <zorder>groupBox_4</zorder>
+  <zorder>groupBox_5</zorder>
+  <zorder>groupBox_6</zorder>
+  <zorder>groupBox_7</zorder>
+  <zorder>groupBox_8</zorder>
+  <zorder>groupBox_9</zorder>
  </widget>
  <resources/>
  <connections>

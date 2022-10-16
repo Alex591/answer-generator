@@ -225,7 +225,7 @@
      <string/>
     </property>
     <property name="statusTip">
-     <string>[For Windows 11] Adds the bypasses necessary to install it in a virtual machine</string>
+     <string>[For Windows 11] Adds the bypasses necessary to install it in a virtual machine or older PCs</string>
     </property>
     <property name="whatsThis">
      <string notr="true"/>
@@ -490,7 +490,7 @@ background-color: #fbfbfb
      <string/>
     </property>
     <property name="statusTip">
-     <string>Checks the drivers and system files on your device for signs of corruption or malicious software.</string>
+     <string>Enables or disables User Account control. This option is strongly recommended to be turned on.</string>
     </property>
     <property name="whatsThis">
      <string notr="true"/>
@@ -550,7 +550,7 @@ background-color: #fbfbfb
      <string/>
     </property>
     <property name="statusTip">
-     <string>Enables or disables User Account control. This option is strongly recommended to be turned on.</string>
+     <string>Checks the drivers and system files on your device for signs of corruption or malicious software.</string>
     </property>
     <property name="whatsThis">
      <string notr="true"/>
