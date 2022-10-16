@@ -110,7 +110,7 @@ class User():
         self.__username = username
         self.__fullname = fullname
         self.__password = password
-        self.autogonon = autologon
+        self.autologon = autologon
 
     def convertpassword(self, password):
         pass
