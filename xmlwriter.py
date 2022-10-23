@@ -43,7 +43,8 @@ class Writer():
             f.write(xml_str)
 
     # Pass functions
-    def add_win_pe_pass(self,harddrive:list[helper.HardDrive]=None, setuplang: str = "en-US", inputlocale: list | None = None, systemlocale: str = "en-US",
+    def add_win_pe_pass(self,harddrive:list[helper.HardDrive]=None, setuplang: str = "en-US", inputlocale: list | None = None,
+                        systemlocale: str = "en-US",
                         userlocale: str = "hu-HU",
                         windowsedition: str = "Professional", fullname: str = "teszt_elek", organization: str = "",
                         virtual_machine: None | bool = None):
@@ -200,7 +201,7 @@ class Writer():
                 ET.SubElement(component_codeintegrity, "SkuPolicyRequired").text = "0"
 
     def add_oobe_pass(self, users: list[helper.User],do_autologin:bool=False, inputlocale: None | list = None, systemlocale: str = "en-US",
-                      userlocale: str = "hu-HU", setuplang: str = "en-US",firstlogoncommands:list=[]):
+                      userlocale: str = "hu-HU", setuplang: str = "en-US",firstlogoncommands:list=[],protectourpc:int[1,2,3]=3):
         if inputlocale is None:
             inputlocale = ["en-US"]
         oobepass = ET.SubElement(self.root, "settings", {"pass": "oobeSystem"})
