@@ -66,8 +66,25 @@ def alllanguages()->list:
 
     :return: a list of language names
     """
-    return ["Hungarian","English (United Kingdom)","English (United States)","English (Canada)","Ukrainian","Romanian"]
+    langs=["Hungarian","English (United Kingdom)","English (Ireland)","German(Austria)","English (United States)","English (Canada)","Ukrainian","Romanian","Polish"]
+    langs.sort()
+    return langs
 
+
+def langcode(language)->str:
+    szotar = {
+        "Hungarian": "hu-HU",
+        "Romanian": "ro-RO",
+        "Ukrainian": "uk-UA",
+        "English (United States)": "en-US",
+        "Polish": "pl-PL",
+        "English (United Kingdom)": "en-GB",
+        "English (Canada)": "en-CA",
+        "English (Ireland)": "en-IE",
+        "German(Austria)": "de-AT"
+
+    }
+    return szotar[language]
 def inputlocales(language: str) -> str:
     """
 
@@ -98,7 +115,8 @@ def powerplan(name: str) -> str:
     assert name.lower() in powerlevels.keys()
     return powerlevels[name.lower()]
 
-
+def privacysettings()->list[str]:
+    return ["Basic Diagnostics","Extended Diagnostics"]
 
 
 

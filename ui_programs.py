@@ -34,6 +34,10 @@ class Ui_Dialog(object):
         Dialog.resize(518, 657)
         Dialog.setMinimumSize(QSize(518, 657))
         Dialog.setMaximumSize(QSize(518, 657))
+        Dialog.setStyleSheet(u".QCheckBox::indicator {\n"
+                                        "     width: 12px;\n"
+                                        "     height: 12px;\n"
+                                        " }")
         self.buttonBox = QDialogButtonBox(Dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setGeometry(QRect(40, 620, 451, 32))
@@ -44,7 +48,7 @@ class Ui_Dialog(object):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(30, 160, 101, 21))
         font = QFont()
-        font.setPointSize(11)
+        font.setPointSize(10)
         font.setBold(True)
         self.label.setFont(font)
         self.googlechrome = QCheckBox(Dialog)
@@ -416,7 +420,7 @@ class Ui_Dialog(object):
 #if QT_CONFIG(tooltip)
         self.jre8.setToolTip(QCoreApplication.translate("Dialog", u"Programming Language", None))
 #endif // QT_CONFIG(tooltip)
-        self.jre8.setText(QCoreApplication.translate("Dialog", u"Java JRE Runtime", None))
+        self.jre8.setText(QCoreApplication.translate("Dialog", u"Java Runtime", None))
         self.groupBox_4.setTitle("")
         self.transmission.setText(QCoreApplication.translate("Dialog", u"Transmission", None))
         self.label_3.setText(QCoreApplication.translate("Dialog", u"File Sharing", None))
