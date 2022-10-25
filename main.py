@@ -9,25 +9,40 @@
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+                            QMetaObject, QObject, QPoint, QRect, QSize, Qt,
+                            QTime, QUrl)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+                           QFontDatabase, QGradient, QIcon, QImage,
+                           QKeySequence, QLinearGradient, QPainter, QPalette,
+                           QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGroupBox,
-    QLabel, QLineEdit, QMainWindow, QPushButton,
-    QSizePolicy, QStatusBar, QWidget)
+                               QLabel, QLineEdit, QMainWindow, QPushButton,
+                               QSizePolicy, QStatusBar, QWidget)
 
 #HELPER IMPORTS
 import xmlwriter
-
-
+import handler
+import helper
 #UI IMPORTS
 
 
 
 class Ui_WindowsAnswerfile(object):
+
+    def filloptions(self):
+        self.win_edition_combo.addItems(handler.getwindowseditions().keys())
+        self.win_language_combobox.addItems(handler.alllanguages())
+        self.sys_locale_combobox.addItems(handler.alllanguages())
+
+        pass
+
+
+
+
+
+
+
+
     def setupUi(self, WindowsAnswerfile):
         if not WindowsAnswerfile.objectName():
             WindowsAnswerfile.setObjectName(u"WindowsAnswerfile")
@@ -187,8 +202,11 @@ class Ui_WindowsAnswerfile(object):
 "	padding-left: 10px;\n"
 "	background-color: rgb(250, 250, 250);\n"
 "}\n"
-"#win_edition_combo QListView:item:hover{\n"
-"	background-color: #f3f3f3\n"
+"#wwin_edition_combo QListView:item:hover{\n"
+"	background-color: #1e90ff\n"
+"}"                                           
+"#win_edition_combo QListView:item:selected{\n"
+"	background-color: #1e90ff\n"
 "}")
         self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
@@ -260,7 +278,10 @@ class Ui_WindowsAnswerfile(object):
 "	background-color: rgb(250, 250, 250);\n"
 "}\n"
 "#win_language_combobox QListView:item:hover{\n"
-"	background-color: #f3f3f3\n"
+"	background-color: #1e90ff\n"
+"}"                                           
+"#win_language_combobox QListView:item:selected{\n"
+"	background-color: #1e90ff\n"
 "}")
         self.label_4 = QLabel(self.centralwidget)
         self.label_4.setObjectName(u"label_4")
@@ -410,7 +431,10 @@ class Ui_WindowsAnswerfile(object):
 "	background-color: rgb(250, 250, 250);\n"
 "}\n"
 "#privacy_combobox QListView:item:hover{\n"
-"	background-color: #f3f3f3\n"
+"	background-color: #1e90ff\n"
+"}"                                           
+"#privacy_combobox QListView:item:selected{\n"
+"	background-color: #1e90ff\n"
 "}")
         self.sys_locale_combobox = QComboBox(self.groupBox)
         self.sys_locale_combobox.setObjectName(u"sys_locale_combobox")
@@ -453,7 +477,10 @@ class Ui_WindowsAnswerfile(object):
 "	background-color: rgb(250, 250, 250);\n"
 "}\n"
 "#sys_locale_combobox QListView:item:hover{\n"
-"	background-color: #f3f3f3\n"
+"	background-color: #1e90ff\n"
+"}"                                           
+"#sys_locale_combobox QListView:item:selected{\n"
+"	background-color: #1e90ff\n"
 "}")
         self.groupBox_2 = QGroupBox(self.centralwidget)
         self.groupBox_2.setObjectName(u"groupBox_2")
@@ -518,6 +545,9 @@ class Ui_WindowsAnswerfile(object):
 
         self.retranslateUi(WindowsAnswerfile)
 
+
+        self.filloptions()
+
         QMetaObject.connectSlotsByName(WindowsAnswerfile)
     # setupUi
 
@@ -540,7 +570,6 @@ class Ui_WindowsAnswerfile(object):
 #endif // QT_CONFIG(statustip)
         self.vm_checkBox.setText(QCoreApplication.translate("WindowsAnswerfile", u"Virtual Machine", None))
         self.win_edition_combo.setCurrentText("")
-        self.win_edition_combo.setProperty("placeholderText", QCoreApplication.translate("WindowsAnswerfile", u"Windows 11 Pro", None))
         self.label.setText(QCoreApplication.translate("WindowsAnswerfile", u"Windows Edition", None))
         self.hdd_checkbox.setText(QCoreApplication.translate("WindowsAnswerfile", u"Automatic HDD assignment", None))
         self.label_2.setText(QCoreApplication.translate("WindowsAnswerfile", u"Windows Language", None))

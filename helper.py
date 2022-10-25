@@ -59,11 +59,9 @@ class Partiton():
         if self.typeid:
             result["TypeID"] = self.typeid
         return result
-    @property
-    def order(self):
-        return self.order
-    @order.setter
-    def order(self, value):
+
+
+    def setorder(self, value)->None:
         self.order = value
 
 

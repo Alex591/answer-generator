@@ -103,7 +103,20 @@ class WifiNetwork():
         os.makedirs(destinationdir,exist_ok=True)
         destfile=os.path.join(destinationdir,"wifi.cmd")
         shutil.move(currentfile,destfile)
-        pass
+
+        # create a new file that will list out all the networks currently in reach and connect to next one,then sleep
+        # for a couple secs
+        with open ("connectandsleep.cmd","w") as f:
+            print("netsh wlan show networks",file=f)
+            print("timeout 2",file=f)
+            print(f"netsh wlan connect ssid={networks[0].networkname} name={networks[0].networkname}",file=f)
+        currentfile = os.path.join(os.getcwd(), "connectandsleep.cmd")
+        destfile = os.path.join(destinationdir, "connectandsleep.cmd")
+        shutil.move(currentfile, destfile)
+
+
+
+
 
 
 

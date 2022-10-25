@@ -20,6 +20,6 @@
 	</MSM>
 	<MacRandomization xmlns="http://www.microsoft.com/networking/WLAN/profile/v3">
 		<enableRandomization>false</enableRandomization>
-		<randomizationSeed>9377800100</randomizationSeed>
+		<randomizationSeed>3520347809</randomizationSeed>
 	</MacRandomization>
 </WLANProfile>
