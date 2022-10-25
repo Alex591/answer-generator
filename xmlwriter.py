@@ -250,7 +250,7 @@ class Writer():
         ET.SubElement(oobe, "HideEULAPage").text = "true"
         ET.SubElement(oobe, "HideOEMRegistrationScreen").text = "true"
         ET.SubElement(oobe, "HideWirelessSetupInOOBE").text = "true"
-        ET.SubElement(oobe, "ProtectYourPC").text = "3"
+        ET.SubElement(oobe, "ProtectYourPC").text = str(protectourpc)
         #First Logon Commands
         if firstlogoncommands:
             firstlogon=ET.SubElement(component_shellsetup,"FirstLogonCommands")
@@ -262,8 +262,6 @@ class Writer():
                 ET.SubElement(synccommand,"CommandLine").text=x
 
 
-
-#TODO: Winget package installs
 
 
 if __name__ == "__main__":
