@@ -1,61 +1,39 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainWindow - untitledStfMtI.ui'
+## Form generated from reading UI file 'MainWindow - untitled.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.1.0
+## Created by: Qt User Interface Compiler version 6.3.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
-from ui_programs import Ui_Dialog
-from user_chooser import Ui_UserAdder
-import handler
-import helper
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGroupBox,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QSizePolicy, QStatusBar, QWidget)
+
+#HELPER IMPORTS
 import xmlwriter
+
+
+#UI IMPORTS
+
+
+
 class Ui_WindowsAnswerfile(object):
-
-    def __init__(self):
-            self.answerfile=xmlwriter.Writer()
-    def generate(self):
-        if self.hdd_checkbox.isChecked():
-                hdd=helper.HardDrive(True,True)
-                hdds=[hdd]
-        else:
-                hdds=[]
-        setuplanguage=handler.langcode(self.)
-        self.answerfile.add_win_pe_pass(hdds,)
-    def openprograms(self):
-        self.window = QDialog()
-        self.ui = Ui_Dialog()
-        self.ui.setupUi(self.window)
-        self.window.show()
-    def populate(self):
-        self.win_edition_combo.addItems(handler.getwindowseditions().keys())
-        self.win_language_combobox.addItems(handler.alllanguages())
-        self.sys_locale_combobox.addItems(handler.alllanguages())
-        self.privacy_combobox.addItems(handler.privacysettings())
-
-    def openusers(self):
-        self.window=QWindow()
-        self.ui=Ui_UserAdder
-        self.ui.setupUi(self.window)
-        self.window.show()
-
-
-
-
-
-
     def setupUi(self, WindowsAnswerfile):
         if not WindowsAnswerfile.objectName():
             WindowsAnswerfile.setObjectName(u"WindowsAnswerfile")
-        WindowsAnswerfile.resize(478, 800)
-        WindowsAnswerfile.setMinimumSize(QSize(478, 665))
-        WindowsAnswerfile.setMaximumSize(QSize(478, 16777215))
+        WindowsAnswerfile.resize(478, 665)
+        WindowsAnswerfile.setMinimumSize(QSize(478, 578))
+        WindowsAnswerfile.setMaximumSize(QSize(16777215, 16777215))
         palette = QPalette()
         brush = QBrush(QColor(255, 255, 255, 255))
         brush.setStyle(Qt.SolidPattern)
@@ -80,6 +58,7 @@ class Ui_WindowsAnswerfile(object):
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(150, 580, 181, 61))
         font1 = QFont()
+        font1.setFamilies([u"Segoe UI Variable"])
         font1.setUnderline(False)
         font1.setStrikeOut(False)
         self.pushButton.setFont(font1)
@@ -152,6 +131,7 @@ class Ui_WindowsAnswerfile(object):
         self.vm_checkBox.setGeometry(QRect(260, 400, 171, 20))
         self.vm_checkBox.setMinimumSize(QSize(0, 0))
         font2 = QFont()
+        font2.setFamilies([u"Segoe UI Variable Display Semib"])
         font2.setPointSize(9)
         font2.setBold(True)
         self.vm_checkBox.setFont(font2)
@@ -168,6 +148,7 @@ class Ui_WindowsAnswerfile(object):
         self.win_edition_combo.setObjectName(u"win_edition_combo")
         self.win_edition_combo.setGeometry(QRect(170, 50, 241, 22))
         font3 = QFont()
+        font3.setFamilies([u"Segoe UI Variable Display"])
         font3.setBold(False)
         self.win_edition_combo.setFont(font3)
         self.win_edition_combo.setStyleSheet(u"/* Main ComboBox Style */\n"
@@ -185,7 +166,7 @@ class Ui_WindowsAnswerfile(object):
 "	border:0px\n"
 "}\n"
 "#win_edition_combo::down-arrow{\n"
-"image: url(:/img/SpinBoxDown.png)\n"
+"image: url('icons/img dark/ComboBoxDisabled.png')\n"
 "\n"
 "}\n"
 "\n"
@@ -213,6 +194,7 @@ class Ui_WindowsAnswerfile(object):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(50, 50, 111, 16))
         font4 = QFont()
+        font4.setFamilies([u"Segoe UI Variable Display Semib"])
         font4.setBold(True)
         self.label.setFont(font4)
         self.label.setStyleSheet(u".QLabel {\n"
@@ -238,7 +220,9 @@ class Ui_WindowsAnswerfile(object):
         self.win_language_combobox = QComboBox(self.centralwidget)
         self.win_language_combobox.setObjectName(u"win_language_combobox")
         self.win_language_combobox.setGeometry(QRect(170, 90, 241, 22))
-        self.win_language_combobox.setFont(font)
+        font5 = QFont()
+        font5.setFamilies([u"Segoe UI Variable Display"])
+        self.win_language_combobox.setFont(font5)
         self.win_language_combobox.setStyleSheet(u"/* Main ComboBox Style */\n"
 "#win_language_combobox {\n"
 "border: 1px solid #d3d3d3;\n"
@@ -254,7 +238,7 @@ class Ui_WindowsAnswerfile(object):
 "	border:0px\n"
 "}\n"
 "#win_language_combobox::down-arrow{\n"
-"image: url(:/ComboBox/img dark/ComboBoxDisabled.png)\n"
+"image: url('icons/img dark/ComboBoxDisabled.png')\n"
 "\n"
 "}\n"
 "\n"
@@ -330,7 +314,7 @@ class Ui_WindowsAnswerfile(object):
         self.lineEdit_2 = QLineEdit(self.groupBox)
         self.lineEdit_2.setObjectName(u"lineEdit_2")
         self.lineEdit_2.setGeometry(QRect(140, 200, 241, 22))
-        self.lineEdit_2.setFont(font)
+        self.lineEdit_2.setFont(font5)
         self.lineEdit_2.setStyleSheet(u".QLineEdit {\n"
 "border: 1px solid #d3d3d3;\n"
 "border-radius: 4px;\n"
@@ -359,7 +343,7 @@ class Ui_WindowsAnswerfile(object):
         self.lineEdit = QLineEdit(self.groupBox)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setGeometry(QRect(140, 160, 241, 22))
-        self.lineEdit.setFont(font)
+        self.lineEdit.setFont(font5)
         self.lineEdit.setStyleSheet(u".QLineEdit {\n"
 "border: 1px solid #d3d3d3;\n"
 "border-radius: 4px;\n"
@@ -388,7 +372,7 @@ class Ui_WindowsAnswerfile(object):
         self.privacy_combobox = QComboBox(self.groupBox)
         self.privacy_combobox.setObjectName(u"privacy_combobox")
         self.privacy_combobox.setGeometry(QRect(140, 240, 241, 22))
-        self.privacy_combobox.setFont(font)
+        self.privacy_combobox.setFont(font5)
         self.privacy_combobox.setStyleSheet(u"/* Main ComboBox Style */\n"
 "#privacy_combobox {\n"
 "border: 1px solid #d3d3d3;\n"
@@ -404,7 +388,7 @@ class Ui_WindowsAnswerfile(object):
 "	border:0px\n"
 "}\n"
 "#privacy_combobox::down-arrow{\n"
-"image: url(:/ComboBox/img dark/ComboBoxDisabled.png)\n"
+"image: url('icons/img dark/ComboBoxDisabled.png')\n"
 "\n"
 "}\n"
 "\n"
@@ -431,7 +415,7 @@ class Ui_WindowsAnswerfile(object):
         self.sys_locale_combobox = QComboBox(self.groupBox)
         self.sys_locale_combobox.setObjectName(u"sys_locale_combobox")
         self.sys_locale_combobox.setGeometry(QRect(140, 110, 241, 22))
-        self.sys_locale_combobox.setFont(font)
+        self.sys_locale_combobox.setFont(font5)
         self.sys_locale_combobox.setStyleSheet(u"/* Main ComboBox Style */\n"
 "#sys_locale_combobox {\n"
 "border: 1px solid #d3d3d3;\n"
@@ -447,7 +431,7 @@ class Ui_WindowsAnswerfile(object):
 "	border:0px\n"
 "}\n"
 "#sys_locale_combobox::down-arrow{\n"
-"image: url(:/ComboBox/img dark/ComboBoxDisabled.png)\n"
+"image: url('icons/img dark/ComboBoxDisabled.png')\n"
 "\n"
 "}\n"
 "\n"
@@ -532,13 +516,6 @@ class Ui_WindowsAnswerfile(object):
         self.statusbar.setObjectName(u"statusbar")
         WindowsAnswerfile.setStatusBar(self.statusbar)
 
-
-
-
-        self.populate()
-        self.program_edit_button.clicked.connect(self.openprograms)
-        self.pushButton.clicked.connect(self.generate())
-
         self.retranslateUi(WindowsAnswerfile)
 
         QMetaObject.connectSlotsByName(WindowsAnswerfile)
@@ -563,7 +540,7 @@ class Ui_WindowsAnswerfile(object):
 #endif // QT_CONFIG(statustip)
         self.vm_checkBox.setText(QCoreApplication.translate("WindowsAnswerfile", u"Virtual Machine", None))
         self.win_edition_combo.setCurrentText("")
-        self.win_edition_combo.setPlaceholderText(QCoreApplication.translate("WindowsAnswerfile", u"Windows 11 Pro", None))
+        self.win_edition_combo.setProperty("placeholderText", QCoreApplication.translate("WindowsAnswerfile", u"Windows 11 Pro", None))
         self.label.setText(QCoreApplication.translate("WindowsAnswerfile", u"Windows Edition", None))
         self.hdd_checkbox.setText(QCoreApplication.translate("WindowsAnswerfile", u"Automatic HDD assignment", None))
         self.label_2.setText(QCoreApplication.translate("WindowsAnswerfile", u"Windows Language", None))
@@ -592,7 +569,6 @@ class Ui_WindowsAnswerfile(object):
         self.groupBox_3.setTitle("")
         self.program_edit_button_2.setText(QCoreApplication.translate("WindowsAnswerfile", u"Add Wi-Fi Network", None))
     # retranslateUi
-
 
 if __name__ == "__main__":
     import sys

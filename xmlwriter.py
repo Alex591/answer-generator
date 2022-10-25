@@ -4,17 +4,16 @@ import handler
 import helper
 
 
-
 class PrivacySettings:
     pass
 
 
 class Writer():
-    def __init__(self,filename:str="autounattend.xml"):
+    def __init__(self, filename: str = "autounattend.xml"):
         # root element
         self.root = ET.Element("unattend", {"xmlns": "urn:schemas-microsoft-com:unattend",
                                             "xmlns:wcm": "http://schemas.microsoft.com/WMIConfig/2002/State"})
-        self.filename=filename
+        self.filename = filename
         # Constants
         self.architecture = "amd64"
 
@@ -43,19 +42,18 @@ class Writer():
             f.write(xml_str)
 
     # Pass functions
-    def add_win_pe_pass(self,harddrive:list[helper.HardDrive]=None, setuplang: str = "en-US", inputlocale: list | None = None,
+    def add_win_pe_pass(self, harddrive: list[helper.HardDrive] = None, setuplang: str = "en-US",
+                        inputlocale: list | None = None,
                         systemlocale: str = "en-US",
                         userlocale: str = "hu-HU",
                         windowsedition: str = "Professional", fullname: str = "teszt_elek", organization: str = "",
                         virtual_machine: None | bool = None):
         if harddrive is None:
-            harddrive=[]
+            harddrive = []
         if inputlocale is None:
             inputlocale = ["en-US"]
         pepass = ET.SubElement(self.root, "settings", {"pass": "windowsPE"})
 
-        
-        
         # adds winPE_Core component
         component_winpe = ET.SubElement(pepass, "component",
                                         self.component("Microsoft-Windows-International-Core-WinPE"))
@@ -72,58 +70,49 @@ class Writer():
         ET.SubElement(component_winpe, "UILanguage").text = setuplang
         ET.SubElement(component_winpe, "UserLocale").text = userlocale
 
-
-
         # adds WinPE_Windows_Setup
         component_winsetup = ET.SubElement(pepass, "component",
                                            self.component("Microsoft-Windows-Setup"))
 
-        #Disk Configuration!
-        #Checking if the harddrive element has elements in it
-        #install to id
-        installto=None
+        # Disk Configuration!
+        # Checking if the harddrive element has elements in it
+        # install to id
+        installto = None
         if harddrive:
-            diskconfig=ET.SubElement(component_winsetup,"DiskConfiguration")
-            ET.SubElement(diskconfig,"WillShowUI").text="OnError"
-            for index,disk in enumerate(harddrive):
-                disk_add=ET.SubElement(diskconfig,"Disk",{"wcm:action": "add"})
-                ET.SubElement(disk_add,"DiskID").text="0"
-                ET.SubElement(disk_add,"WillWipeDisk").text="true"
+            diskconfig = ET.SubElement(component_winsetup, "DiskConfiguration")
+            ET.SubElement(diskconfig, "WillShowUI").text = "OnError"
+            for index, disk in enumerate(harddrive):
+                disk_add = ET.SubElement(diskconfig, "Disk", {"wcm:action": "add"})
+                ET.SubElement(disk_add, "DiskID").text = "0"
+                ET.SubElement(disk_add, "WillWipeDisk").text = "true"
                 if disk.windowspartition:
                     disk.setwinpartition()
-                    installto=index
-                #Creating the partitions
+                    installto = index
+                # Creating the partitions
 
-                createpartitions=ET.SubElement(disk_add,"CreatePartitions")
+                createpartitions = ET.SubElement(disk_add, "CreatePartitions")
 
                 for partition in disk.partitionlist:
-                    partition_subelement=ET.SubElement(createpartitions,"CreatePartition",{"wcm:action": "add"})
-                    for text,value in partition.createpartition().items():
-                        ET.SubElement(partition_subelement,text).text=value
-                
-                #modifying the partitions
+                    partition_subelement = ET.SubElement(createpartitions, "CreatePartition", {"wcm:action": "add"})
+                    for text, value in partition.createpartition().items():
+                        ET.SubElement(partition_subelement, text).text = value
 
-                modifypartitions=ET.SubElement(disk_add,"ModifyPartitions")
+                # modifying the partitions
+
+                modifypartitions = ET.SubElement(disk_add, "ModifyPartitions")
                 for partition in disk.partitionlist:
-                    partition_subelement=ET.SubElement(modifypartitions,"ModifyPartition",{"wcm:action": "add"})
-                    for text,value in partition.modifypartition().items():
-                        ET.SubElement(partition_subelement,text).text=value
-        
-        #Where to install the image
-            imginstall=ET.SubElement(component_winsetup,"ImageInstall")
-            osimage=ET.SubElement(imginstall,"OSImage")
-            installto=ET.SubElement(osimage,"InstallTo")
-            ET.SubElement(installto,"DiskID").text=index
-            ET.SubElement(installto,"PartitionID").text="4"
+                    partition_subelement = ET.SubElement(modifypartitions, "ModifyPartition", {"wcm:action": "add"})
+                    for text, value in partition.modifypartition().items():
+                        ET.SubElement(partition_subelement, text).text = value
 
+            # Where to install the image
+            imginstall = ET.SubElement(component_winsetup, "ImageInstall")
+            osimage = ET.SubElement(imginstall, "OSImage")
+            installto = ET.SubElement(osimage, "InstallTo")
+            ET.SubElement(installto, "DiskID").text = index
+            ET.SubElement(installto, "PartitionID").text = "4"
 
-
-
-
-
-
-        
-        #setting the product key
+        # setting the product key
         userdata = ET.SubElement(component_winsetup, "UserData")
         productkey = ET.SubElement(userdata, "ProductKey")
         ET.SubElement(productkey, "Key").text = handler.getproductkey(windowsedition)
@@ -159,7 +148,6 @@ class Writer():
             ET.SubElement(runcommand_rambypass, "Order").text = '5'
             ET.SubElement(runcommand_rambypass,
                           "Path").text = "reg add HKLM\System\Setup\LabConfig /v BypassRAMCheck /t reg_dword /d 0x00000001 /f"
-        
 
     def add_offlineservicing_pass(self, enable_user_acc_control: None | bool = None,
                                   enable_code_integrity: None | bool = None):
@@ -200,8 +188,12 @@ class Writer():
             else:
                 ET.SubElement(component_codeintegrity, "SkuPolicyRequired").text = "0"
 
-    def add_oobe_pass(self, users: list[helper.User],do_autologin:bool=False, inputlocale: None | list = None, systemlocale: str = "en-US",
-                      userlocale: str = "hu-HU", setuplang: str = "en-US",firstlogoncommands:list=[],protectourpc:int[1,2,3]=3):
+    def add_oobe_pass(self, users: list[helper.User], do_autologin: bool = False, inputlocale: None | list = None,
+                      systemlocale: str = "en-US",
+                      userlocale: str = "hu-HU", setuplang: str = "en-US", firstlogoncommands=None,
+                      protectourpc: int = 3):
+        if firstlogoncommands is None:
+            firstlogoncommands = []
         if inputlocale is None:
             inputlocale = ["en-US"]
         oobepass = ET.SubElement(self.root, "settings", {"pass": "oobeSystem"})
@@ -230,48 +222,44 @@ class Writer():
             passelement = ET.SubElement(localaccount, "Password")
             ET.SubElement(passelement, "Value").text = x.password
             ET.SubElement(passelement, "PlainText").text = "true"
-            
 
-            #Wallpaper
-            #themeparent=ET.SubElement(localaccount,"Themes")
-            #themename=ET.SubElement(themeparent,"ThemeName")
-            #ET.SubElement(themeparent,"DesktopBackground").text="%WINDIR%\web\wallpaper\\valami.png"
-        #the primary user will be the first user provided
-        autologon=ET.SubElement(component_shellsetup,"AutoLogon")
-        pw=ET.SubElement(autologon,"Password")
-        ET.SubElement(pw,"Value").text=users[0].password
-        ET.SubElement(pw,"PlainText").text= "true"
-        ET.SubElement(autologon,"Enabled").text=str(do_autologin).lower()
-        ET.SubElement(autologon,"Username").text=users[0].username
-        
-
+            # Wallpaper
+            # themeparent=ET.SubElement(localaccount,"Themes")
+            # themename=ET.SubElement(themeparent,"ThemeName")
+            # ET.SubElement(themeparent,"DesktopBackground").text="%WINDIR%\web\wallpaper\\valami.png"
+        # the primary user will be the first user provided
+        autologon = ET.SubElement(component_shellsetup, "AutoLogon")
+        pw = ET.SubElement(autologon, "Password")
+        ET.SubElement(pw, "Value").text = users[0].password
+        ET.SubElement(pw, "PlainText").text = "true"
+        ET.SubElement(autologon, "Enabled").text = str(do_autologin).lower()
+        ET.SubElement(autologon, "Username").text = users[0].username
 
         oobe = ET.SubElement(component_shellsetup, "OOBE")
         ET.SubElement(oobe, "HideEULAPage").text = "true"
         ET.SubElement(oobe, "HideOEMRegistrationScreen").text = "true"
         ET.SubElement(oobe, "HideWirelessSetupInOOBE").text = "true"
         ET.SubElement(oobe, "ProtectYourPC").text = str(protectourpc)
-        #First Logon Commands
+        # First Logon Commands
         if firstlogoncommands:
-            firstlogon=ET.SubElement(component_shellsetup,"FirstLogonCommands")
-            for priority,x in enumerate(firstlogoncommands):
-                synccommand=ET.SubElement(firstlogon    ,"SynchronousCommand", {"wcm:action": "add"})
-                ET.SubElement(synccommand,"Order").text = str(priority+1)
-                ET.SubElement(synccommand,"Description").text= f"Command Number {priority}"
-                ET.SubElement(synccommand,"RequiresUserInput").text="false"
-                ET.SubElement(synccommand,"CommandLine").text=x
-
-
+            firstlogon = ET.SubElement(component_shellsetup, "FirstLogonCommands")
+            for priority, x in enumerate(firstlogoncommands):
+                synccommand = ET.SubElement(firstlogon, "SynchronousCommand", {"wcm:action": "add"})
+                ET.SubElement(synccommand, "Order").text = str(priority + 1)
+                ET.SubElement(synccommand, "Description").text = f"Command Number {priority}"
+                ET.SubElement(synccommand, "RequiresUserInput").text = "false"
+                ET.SubElement(synccommand, "CommandLine").text = x
 
 
 if __name__ == "__main__":
     x = Writer()
-    alexusere = helper.User("Administrators", "Csalexke","alex","Ádám Alex")
-    winhdd=helper.HardDrive(True,True)
-    x.add_win_pe_pass(virtual_machine=True,setuplang="hu-HU",inputlocale=["hu-HU"],windowsedition="Professional",systemlocale="hu-HU",fullname=alexusere.fullname,harddrive=[winhdd])
+    alexusere = helper.User("Administrators", "Csalexke", "alex", "Ádám Alex")
+    winhdd = helper.HardDrive(wipedisk=True, windowspartition=True)
+    x.add_win_pe_pass(virtual_machine=True, setuplang="hu-HU", inputlocale=["hu-HU"], windowsedition="Professional",
+                      systemlocale="hu-HU", fullname=alexusere.fullname)
     x.add_offlineservicing_pass(enable_user_acc_control=True, enable_code_integrity=False)
-    
-    #alexmasikusere = helper.User("Users","CsUser","user")
+
+    # alexmasikusere = helper.User("Users","CsUser","user")
 
     alexlistaja = [alexusere]
     x.add_oobe_pass(alexlistaja)

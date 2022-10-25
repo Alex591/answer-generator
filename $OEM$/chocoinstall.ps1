@@ -26,5 +26,9 @@ function Install-Chocolatey {
         Invoke-WebRequest -Uri "https://github.com/microsoft/winget-cli/releases/download/v1.1.12653/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -OutFile "C:\PS\WinGet.msixbundle"
 Add-AppxPackage "C:\PS\WinGet.msixbundle"
         
+        Invoke-WebRequest -Uri "https://github.com/microsoft/winget-cli/releases/download/v1.1.12653/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -OutFile "C:\PS\WinGet.msixbundle"
+Add-AppxPackage "C:\PS\WinGet.msixbundle"
+        
 winget install 9WZDNCRFJ3TJ --accept-package-agreements --accept-source-agreements
 choco install oracle-sql-developer -y
+winget install Ubisoft.Connect --accept-package-agreements --accept-source-agreements

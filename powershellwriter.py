@@ -125,6 +125,7 @@ def make_and_move(programs:list[Program]):
 
 if __name__=="__main__":
     test=Program("netflix")
+    test3=Program("ubisoft-connect")
     test2=Program("oracle1sql1developer")
     print(test.installstring)
-    make_and_move([test,test2])
+    make_and_move([test,test2,test3])
