@@ -25,7 +25,8 @@ class Program:
 
         self.installstring=f"{'winget' if self.winget else 'choco'} install {self.programnamed} {self.__installflags}"
 
-
+    def __str__(self):
+        return f"Program: {self.programnamed} uses winget:{self.__winget}"
         
     def fixlines(self,old:str)->str:
         return old.replace("1","-")
@@ -34,7 +35,7 @@ class Program:
         wingetdict={"instagram":"9NBLGGH5L9XT","whatsapp":"9NKSQGP7F2NH","netflix":"9WZDNCRFJ3TJ","disneyplus":"9NXQXXLFST89",
         "spotify":"Spotify.Spotify","ubisoft-connect":"Ubisoft.Connect","steam":"Valve.Steam","origin":"ElectronicArts.EADesktop",
         "epicgameslauncher":"EpicGames.EpicGamesLauncher","winrar":"RARLab.WinRAR","itunes":"Apple.iTunes","vlc":"VideoLAN.VLC",
-        "plex":"Plex.Plex","powertoys":"Microsoft.PowerToys"}
+        "plex":"Plex.Plex","powertoys":"Microsoft.PowerToys","office":"Microsoft.Office"}
         if program in wingetdict.keys():
             self.__winget=True
             print(wingetdict[program])

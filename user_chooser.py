@@ -12,6 +12,8 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
+import helper
+
 
 class Ui_UserAdder(object):
 
@@ -21,7 +23,9 @@ class Ui_UserAdder(object):
         """
         accounttypes=["Administrators","Users"]
         combobox.addItems(accounttypes)
-
+    def createduser(self)->helper.User:
+        #return helper.User(self.role_dropdown.currentText(),self.username_field.text(),self.passowrd_field.text(),self.)
+        pass
 
 
 

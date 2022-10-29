@@ -9,24 +9,46 @@
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
+                            QMetaObject, QObject, QPoint, QRect,
+                            QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+                           QFont, QFontDatabase, QGradient, QIcon,
+                           QImage, QKeySequence, QLinearGradient, QPainter,
+                           QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractButton, QApplication, QCheckBox, QDialog,
-    QDialogButtonBox, QFrame, QGroupBox, QLabel,
-    QSizePolicy, QWidget)
+                               QDialogButtonBox, QFrame, QGroupBox, QLabel,
+                               QSizePolicy, QWidget)
 
-class Ui_Dialog(object):
+import powershellwriter
+class Ui_Dialog(QDialog):
+    def __init__(self):
+        QDialog.__init__(self)
+        self.program_list=[]
+    def accept_function(self):
+        for x in self.programs():
+            if x.isChecked():
+                varname=f"{x=}".split("=")[2]
+                varname=varname.split(")")[0]
+                self.program_list.append(powershellwriter.Program(varname.replace('"','')))
+        for x in self.program_list:
+            print(x)
+        self.close()
 
-    def powershell(self):
+
+
+
+
+    def programs(self) -> list[QCheckBox]:
         """
-        Makes the powershell script.
-        :return:
+        Puts all the checkboxes in a list to iterate over and to get them connected
+        :return: List of program variables of type QCheckBox
         """
-    pass
+        return [self.opera, self.googlechrome, self.firefox, self.pycharm, self.vscode, self.oraclejdk, self.python,
+                self.notepadplusplus, self.putty, self.eclipse, self.oracle1sql1developer, self.jre8, self.qbittorent,
+                self.transmission, self.zoom, self.discord, self.skype, self.msteams, self.discord, self.skype,
+                self.instagram, self.whatsapp, self.office, self.netflix, self.spotify, self.disneyplus,
+                self.ubisoft1connect, self.origin, self.epicgameslauncher, self.Steam, self.winrar, self.itunes,
+                self.vlc, self.plex, self.powertoys]
 
     def setupUi(self, Dialog):
         if not Dialog.objectName():
@@ -35,15 +57,15 @@ class Ui_Dialog(object):
         Dialog.setMinimumSize(QSize(518, 657))
         Dialog.setMaximumSize(QSize(518, 657))
         Dialog.setStyleSheet(u".QCheckBox::indicator {\n"
-                                        "     width: 12px;\n"
-                                        "     height: 12px;\n"
-                                        " }")
+                             "     width: 12px;\n"
+                             "     height: 12px;\n"
+                             " }")
         self.buttonBox = QDialogButtonBox(Dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setGeometry(QRect(40, 620, 451, 32))
         self.buttonBox.setLayoutDirection(Qt.LeftToRight)
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
         self.label = QLabel(Dialog)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(30, 160, 101, 21))
@@ -78,11 +100,11 @@ class Ui_Dialog(object):
         self.groupBox.setObjectName(u"groupBox")
         self.groupBox.setGeometry(QRect(10, 10, 501, 131))
         self.groupBox.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                    "border: 1px solid #e5e5e5;\n"
+                                    "border-radius: 6px;\n"
+                                    "background-color: #fbfbfb\n"
+                                    "}\n"
+                                    "")
         self.label_6 = QLabel(self.groupBox)
         self.label_6.setObjectName(u"label_6")
         self.label_6.setGeometry(QRect(10, 90, 471, 31))
@@ -90,10 +112,10 @@ class Ui_Dialog(object):
         font4.setPointSize(9)
         self.label_6.setFont(font4)
         self.label_6.setStyleSheet(u".QLabel {\n"
-"background-color: #fbfbfb;\n"
-"	color: rgb(0, 70, 124);\n"
-"}\n"
-"")
+                                   "background-color: #fbfbfb;\n"
+                                   "	color: rgb(0, 70, 124);\n"
+                                   "}\n"
+                                   "")
         self.label_6.setFrameShape(QFrame.NoFrame)
         self.label_6.setFrameShadow(QFrame.Plain)
         self.label_6.setTextFormat(Qt.RichText)
@@ -107,9 +129,9 @@ class Ui_Dialog(object):
         font5.setPointSize(8)
         self.label_5.setFont(font5)
         self.label_5.setStyleSheet(u".QLabel {\n"
-"background-color: #fbfbfb;\n"
-"}\n"
-"")
+                                   "background-color: #fbfbfb;\n"
+                                   "}\n"
+                                   "")
         self.label_5.setFrameShape(QFrame.NoFrame)
         self.label_5.setFrameShadow(QFrame.Plain)
         self.label_5.setTextFormat(Qt.RichText)
@@ -119,20 +141,20 @@ class Ui_Dialog(object):
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.groupBox_2.setGeometry(QRect(10, 150, 131, 121))
         self.groupBox_2.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                      "border: 1px solid #e5e5e5;\n"
+                                      "border-radius: 6px;\n"
+                                      "background-color: #fbfbfb\n"
+                                      "}\n"
+                                      "")
         self.groupBox_3 = QGroupBox(Dialog)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.groupBox_3.setGeometry(QRect(10, 280, 131, 231))
         self.groupBox_3.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                      "border: 1px solid #e5e5e5;\n"
+                                      "border-radius: 6px;\n"
+                                      "background-color: #fbfbfb\n"
+                                      "}\n"
+                                      "")
         self.label_2 = QLabel(self.groupBox_3)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setGeometry(QRect(20, 10, 111, 16))
@@ -177,11 +199,11 @@ class Ui_Dialog(object):
         self.groupBox_4.setObjectName(u"groupBox_4")
         self.groupBox_4.setGeometry(QRect(190, 150, 131, 121))
         self.groupBox_4.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                      "border: 1px solid #e5e5e5;\n"
+                                      "border-radius: 6px;\n"
+                                      "background-color: #fbfbfb\n"
+                                      "}\n"
+                                      "")
         self.transmission = QCheckBox(self.groupBox_4)
         self.transmission.setObjectName(u"transmission")
         self.transmission.setGeometry(QRect(20, 60, 111, 17))
@@ -199,11 +221,11 @@ class Ui_Dialog(object):
         self.groupBox_5.setObjectName(u"groupBox_5")
         self.groupBox_5.setGeometry(QRect(190, 280, 131, 171))
         self.groupBox_5.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                      "border: 1px solid #e5e5e5;\n"
+                                      "border-radius: 6px;\n"
+                                      "background-color: #fbfbfb\n"
+                                      "}\n"
+                                      "")
         self.label_7 = QLabel(self.groupBox_5)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setGeometry(QRect(0, 10, 131, 20))
@@ -221,10 +243,10 @@ class Ui_Dialog(object):
         self.skype.setObjectName(u"skype")
         self.skype.setGeometry(QRect(20, 80, 101, 17))
         self.skype.setFont(font1)
-        self.thunderbird = QCheckBox(self.groupBox_5)
-        self.thunderbird.setObjectName(u"thunderbird")
-        self.thunderbird.setGeometry(QRect(20, 100, 101, 17))
-        self.thunderbird.setFont(font1)
+        self.msteams = QCheckBox(self.groupBox_5)
+        self.msteams.setObjectName(u"msteams")
+        self.msteams.setGeometry(QRect(20, 100, 101, 17))
+        self.msteams.setFont(font1)
         self.instagram = QCheckBox(self.groupBox_5)
         self.instagram.setObjectName(u"instagram")
         self.instagram.setGeometry(QRect(20, 120, 101, 17))
@@ -237,11 +259,11 @@ class Ui_Dialog(object):
         self.groupBox_6.setObjectName(u"groupBox_6")
         self.groupBox_6.setGeometry(QRect(370, 150, 120, 121))
         self.groupBox_6.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                      "border: 1px solid #e5e5e5;\n"
+                                      "border-radius: 6px;\n"
+                                      "background-color: #fbfbfb\n"
+                                      "}\n"
+                                      "")
         self.label_8 = QLabel(self.groupBox_6)
         self.label_8.setObjectName(u"label_8")
         self.label_8.setGeometry(QRect(0, 10, 121, 20))
@@ -263,11 +285,11 @@ class Ui_Dialog(object):
         self.groupBox_7.setObjectName(u"groupBox_7")
         self.groupBox_7.setGeometry(QRect(370, 280, 121, 131))
         self.groupBox_7.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                      "border: 1px solid #e5e5e5;\n"
+                                      "border-radius: 6px;\n"
+                                      "background-color: #fbfbfb\n"
+                                      "}\n"
+                                      "")
         self.label_9 = QLabel(self.groupBox_7)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setGeometry(QRect(0, 10, 121, 20))
@@ -293,11 +315,11 @@ class Ui_Dialog(object):
         self.groupBox_8.setObjectName(u"groupBox_8")
         self.groupBox_8.setGeometry(QRect(190, 460, 131, 80))
         self.groupBox_8.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                      "border: 1px solid #e5e5e5;\n"
+                                      "border-radius: 6px;\n"
+                                      "background-color: #fbfbfb\n"
+                                      "}\n"
+                                      "")
         self.label_10 = QLabel(self.groupBox_8)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setGeometry(QRect(0, 10, 131, 20))
@@ -311,11 +333,11 @@ class Ui_Dialog(object):
         self.groupBox_9.setObjectName(u"groupBox_9")
         self.groupBox_9.setGeometry(QRect(370, 420, 120, 151))
         self.groupBox_9.setStyleSheet(u".QGroupBox {\n"
-"border: 1px solid #e5e5e5;\n"
-"border-radius: 6px;\n"
-"background-color: #fbfbfb\n"
-"}\n"
-"")
+                                      "border: 1px solid #e5e5e5;\n"
+                                      "border-radius: 6px;\n"
+                                      "background-color: #fbfbfb\n"
+                                      "}\n"
+                                      "")
         self.label_11 = QLabel(self.groupBox_9)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setGeometry(QRect(0, 10, 121, 20))
@@ -357,69 +379,73 @@ class Ui_Dialog(object):
         self.groupBox_8.raise_()
         self.groupBox_9.raise_()
         self.retranslateUi(Dialog)
+        self.buttonBox.accepted.connect(self.accept_function)
         self.buttonBox.accepted.connect(Dialog.accept)
         self.buttonBox.rejected.connect(Dialog.reject)
 
         QMetaObject.connectSlotsByName(Dialog)
+
     # setupUi
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"Web Browsers", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.googlechrome.setToolTip(QCoreApplication.translate("Dialog", u"Web Browser by Google", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.googlechrome.setText(QCoreApplication.translate("Dialog", u"Chrome", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.firefox.setToolTip(QCoreApplication.translate("Dialog", u"Privacy focused Browser", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.firefox.setText(QCoreApplication.translate("Dialog", u"Mozilla Firefox", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.opera.setToolTip(QCoreApplication.translate("Dialog", u"Browser with built-in VPN", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.opera.setText(QCoreApplication.translate("Dialog", u"Opera", None))
         self.label_4.setText(QCoreApplication.translate("Dialog", u"Programs", None))
         self.groupBox.setTitle("")
         self.label_6.setText(QCoreApplication.translate("Dialog", u"Note: Requires an Internet connection", None))
-        self.label_5.setText(QCoreApplication.translate("Dialog", u"You can add programs the with a help of a startup script will be preinstalled on your device.", None))
+        self.label_5.setText(QCoreApplication.translate("Dialog",
+                                                        u"You can add programs the with a help of a startup script will be preinstalled on your device.",
+                                                        None))
         self.groupBox_2.setTitle("")
         self.groupBox_3.setTitle("")
         self.label_2.setText(QCoreApplication.translate("Dialog", u"Developer Tools", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.python.setToolTip(QCoreApplication.translate("Dialog", u"Programming Language", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.python.setText(QCoreApplication.translate("Dialog", u"Python", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.pycharm.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.pycharm.setText(QCoreApplication.translate("Dialog", u"Pycharm", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.vscode.setToolTip(QCoreApplication.translate("Dialog", u"Free code editor by Microsoft", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.vscode.setText(QCoreApplication.translate("Dialog", u"VS Code", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.oraclejdk.setToolTip(QCoreApplication.translate("Dialog", u"Java Development Kit", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.oraclejdk.setText(QCoreApplication.translate("Dialog", u"Java JDK", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.notepadplusplus.setToolTip(QCoreApplication.translate("Dialog", u"Programming Language", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.notepadplusplus.setText(QCoreApplication.translate("Dialog", u"Notepad++", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.putty.setToolTip(QCoreApplication.translate("Dialog", u"Programming Language", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.putty.setText(QCoreApplication.translate("Dialog", u"PuTTY", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.eclipse.setToolTip(QCoreApplication.translate("Dialog", u"Programming Language", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.eclipse.setText(QCoreApplication.translate("Dialog", u"Eclipse", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.oracle1sql1developer.setToolTip(QCoreApplication.translate("Dialog", u"Programming Language", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.oracle1sql1developer.setText(QCoreApplication.translate("Dialog", u"SQL Developer", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.jre8.setToolTip(QCoreApplication.translate("Dialog", u"Programming Language", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.jre8.setText(QCoreApplication.translate("Dialog", u"Java Runtime", None))
         self.groupBox_4.setTitle("")
         self.transmission.setText(QCoreApplication.translate("Dialog", u"Transmission", None))
@@ -427,29 +453,29 @@ class Ui_Dialog(object):
         self.qbittorent.setText(QCoreApplication.translate("Dialog", u"qbittorent", None))
         self.groupBox_5.setTitle("")
         self.label_7.setText(QCoreApplication.translate("Dialog", u"Socials", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.zoom.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.zoom.setText(QCoreApplication.translate("Dialog", u"Zoom", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.discord.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.discord.setText(QCoreApplication.translate("Dialog", u"Discord", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.skype.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.skype.setText(QCoreApplication.translate("Dialog", u"Skype", None))
-#if QT_CONFIG(tooltip)
-        self.thunderbird.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
-#endif // QT_CONFIG(tooltip)
-        self.thunderbird.setText(QCoreApplication.translate("Dialog", u"Teams", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
+        self.msteams.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
+        # endif // QT_CONFIG(tooltip)
+        self.msteams.setText(QCoreApplication.translate("Dialog", u"Teams", None))
+        # if QT_CONFIG(tooltip)
         self.instagram.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.instagram.setText(QCoreApplication.translate("Dialog", u"Instagram", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.whatsapp.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.whatsapp.setText(QCoreApplication.translate("Dialog", u"Whatsapp", None))
         self.groupBox_6.setTitle("")
         self.label_8.setText(QCoreApplication.translate("Dialog", u"Streaming", None))
@@ -464,9 +490,9 @@ class Ui_Dialog(object):
         self.Steam.setText(QCoreApplication.translate("Dialog", u"Steam", None))
         self.groupBox_8.setTitle("")
         self.label_10.setText(QCoreApplication.translate("Dialog", u"Office", None))
-#if QT_CONFIG(tooltip)
+        # if QT_CONFIG(tooltip)
         self.office.setToolTip(QCoreApplication.translate("Dialog", u"Python IDE", None))
-#endif // QT_CONFIG(tooltip)
+        # endif // QT_CONFIG(tooltip)
         self.office.setText(QCoreApplication.translate("Dialog", u"Office 365", None))
         self.groupBox_9.setTitle("")
         self.label_11.setText(QCoreApplication.translate("Dialog", u"Other", None))
@@ -476,4 +502,3 @@ class Ui_Dialog(object):
         self.plex.setText(QCoreApplication.translate("Dialog", u"Plex", None))
         self.powertoys.setText(QCoreApplication.translate("Dialog", u"PowerToys", None))
     # retranslateUi
-

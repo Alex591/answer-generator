@@ -20,11 +20,13 @@ from PySide6.QtWidgets import (QAbstractButton, QApplication, QComboBox, QDialog
 import diskoperations
 
 class Ui_Dialog(object):
+    def __init__(self):
+        self.drivetosave=""
 
     def fillwithoptions(self):
         self.comboBox.addItems(diskoperations.getdriveletters())
-
-
+    def setdrivetosave(self,value):
+        self.drivetosave=value
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Save to...")
@@ -35,7 +37,7 @@ class Ui_Dialog(object):
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setGeometry(QRect(30, 90, 341, 32))
         self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Ok)
         self.comboBox = QComboBox(Dialog)
         self.comboBox.setObjectName(u"comboBox")
         self.comboBox.setGeometry(QRect(70, 60, 121, 22))
@@ -53,6 +55,7 @@ class Ui_Dialog(object):
         self.label_2.setGeometry(QRect(30, 60, 43, 21))
 
         self.retranslateUi(Dialog)
+        self.buttonBox.accepted.connect(lambda: self.setdrivetosave(self.comboBox.currentText()))
         self.buttonBox.accepted.connect(Dialog.accept)
         self.buttonBox.rejected.connect(Dialog.reject)
 
