@@ -110,11 +110,14 @@ class WifiNetwork():
             print("netsh wlan show networks",file=f)
             print("timeout 2",file=f)
             print(f"netsh wlan connect ssid={networks[0].networkname} name={networks[0].networkname}",file=f)
+            print("timeout 4", file=f)
         currentfile = os.path.join(os.getcwd(), "connectandsleep.cmd")
         destfile = os.path.join(destinationdir, "connectandsleep.cmd")
         shutil.move(currentfile, destfile)
 
-
+    @staticmethod
+    def protocols()->list:
+        return ["WPA2PSK","WPA2Enterprise","WPA3PSK"]
 
 
 

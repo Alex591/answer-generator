@@ -19,9 +19,12 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QGroupBox,
                                QLabel, QLineEdit, QMainWindow, QPushButton,
                                QSizePolicy, QStatusBar, QWidget, QDialog, QInputDialog)
 
-from multiprocessing import Process,Queue,Pipe
+import random
 
 import diskoperations
+import powershellwriter
+import ui_wifiadder
+import wificonfig
 # HELPER IMPORTS
 import xmlwriter
 import handler
@@ -31,8 +34,9 @@ import ui_programs
 import user_chooser
 import ui_drivesave
 
+
 class Ui_WindowsAnswerfile(object):
-    def __init__(self)-> None:
+    def __init__(self) -> None:
         """
         Initalizes the necessary object for Answer File Genereation.
         This includes program returns from QDialog objects
@@ -41,9 +45,11 @@ class Ui_WindowsAnswerfile(object):
 
         :return: None
         """
-        self.programlist=[]
-        self.drivetosave=""
-        self.users=[]
+        self.programlist = []
+        self.drivetosave = ""
+        self.users = []
+        self.firstlogoncommands = []
+        self.wifi = []
         pass
 
     def filloptions(self) -> None:
@@ -67,11 +73,79 @@ class Ui_WindowsAnswerfile(object):
         # users
         self.user_edit_button.clicked.connect(self.openusers)
 
-    def generateAnswerFile(self,users:helper.User,hdd:helper.HardDrive) -> xmlwriter.Writer:
+    def generateuser(self) -> None:
+        """
+        Generates a new random user and appends it to the self.users list
 
-        pass
+        :return: None
+        """
+        admin_fullname_list = ["Bob", "Not Admin", "The Boss", "Limitless Power", "Luke Skywalker", "Chili Cheese",
+                               "Nikola Tesla", "Cool Admin"]
+        randomuser = helper.User("Administrators", "Admin", "admin", random.choice(admin_fullname_list), False)
+        self.users.append(randomuser)
+
+    def getfullname(self) -> str:
+        # if the user list is empty, wee need to generate a new admin user
+        if len(self.users) == 0:
+            self.generateuser()
+        return self.users[0].fullname
+
+    def setfirstlogoncommands(self) -> None:
+        """
+        Sets the First logon commands according to if a wifi or preinstalled programs have been added or not
+        :return:
+        """
+        if self.wifi:
+            sleep_connect = "cmd.exe C:\connectandsleep.cmd"
+            addprofile = "cmd.exe C:\wifi.cmd"
+            self.firstlogoncommands.append(addprofile)
+            self.firstlogoncommands.append(sleep_connect)
+
+        if self.programlist:
+            commandtoadd = "powershell -executionpolicy unrestricted -command Unblock-File C:\chocoinstall.ps1; powershell -command C:\chocoinstall.ps1"
+            self.firstlogoncommands.append(commandtoadd)
+
+    def generate_answer_file(self):
+        answerfile = xmlwriter.Writer()
+        # if HDD checkbox is checked then we need to create a windows partition HDD
+        language_code_win = handler.langcode(self.win_language_combobox.currentText())
+        language_code_syslocale = handler.langcode(self.sys_locale_combobox.currentText())
+        win_edition = self.win_edition_combo.currentText()
+        org_name = self.lineEdit_2.text()
+        computer_name = self.lineEdit.text()
+        if not computer_name:
+            computer_name="PENGUIN-PC"
+        # For convinience, if the user language and system lang differ,assuming the user wants both keyboard inputs
+        if language_code_syslocale != language_code_win:
+            input_locale = [language_code_win, language_code_syslocale]
+        else:
+            input_locale = [language_code_win]
+
+        if self.hdd_checkbox.isChecked():
+            winhdd = [helper.HardDrive(wipedisk=True, windowspartition=True)]
+            answerfile.add_win_pe_pass(harddrive=winhdd, setuplang=language_code_win, inputlocale=input_locale,
+                                       systemlocale=language_code_syslocale, userlocale=language_code_syslocale,
+                                       windowsedition=win_edition, fullname=computer_name, organization=org_name,
+                                       virtual_machine=self.vm_checkBox.isChecked())
+        else:
+            answerfile.add_win_pe_pass(setuplang=language_code_win, inputlocale=input_locale,
+                                       systemlocale=language_code_syslocale, userlocale=language_code_syslocale,
+                                       windowsedition=win_edition, fullname=self.getfullname(), organization=org_name,
+                                       virtual_machine=self.vm_checkBox.isChecked())
+
+        answerfile.add_offlineservicing_pass(self.uac_checkbox.isChecked(),self.codeintegrity_checkbox.isChecked())
+        self.setfirstlogoncommands()
+        if self.wifi:
+            wificonfig.WifiNetwork.createcmd(self.wifi)
+        powershellwriter.make_and_move(self.programlist)
+        protect_diag_level = 3 if self.privacy_combobox.currentText() == "Basic Diagnostics" else 1
+        answerfile.add_oobe_pass(users=self.users, do_autologin=self.users[0].autologon, inputlocale=input_locale,
+                                 systemlocale=language_code_syslocale, userlocale=language_code_syslocale,
+                                 setuplang=language_code_win, firstlogoncommands=self.firstlogoncommands,protectourpc=protect_diag_level)
+        answerfile.write()
 
     def opendiskchooser(self):
+        self.generate_answer_file()
         self.window = QDialog()
         self.ui = ui_drivesave.Ui_Dialog()
         self.ui.setupUi(self.window)
@@ -79,32 +153,38 @@ class Ui_WindowsAnswerfile(object):
         self.window.show()
         if self.window.exec() == QDialog.Accepted:
             self.drivetosave = self.ui.drivetosave
-            print(f"siker {self.drivetosave}")
+            diskoperations.copy_to_oem_folder(self.drivetosave)
+            diskoperations.copy_to_sources_folder(self.drivetosave)
 
-    #opens the User adder window
+    # opens the User adder window
     def openusers(self) -> None:
         self.window = QDialog()
         self.ui = user_chooser.Ui_UserAdder()
         self.ui.setupUi(self.window)
         self.window.show()
         if self.window.exec() == QDialog.Accepted:
-            pass
+            self.users.append(self.ui.createduser())
+            print(self.ui.createduser())
 
-    #opens the wifi adder window
+    # opens the wifi adder window
     def openwifi(self) -> None:
-        print(dir(Ui_WindowsAnswerfile))
-        print("dsds")
-        pass
-    #opens the thing
+        self.window = QDialog()
+        self.ui = ui_wifiadder.Ui_Dialog()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        if self.window.exec() == QDialog.Accepted:
+            wifiN=self.ui.wifinetwork()
+            wifiN.write()
+
+
+    # opens the thing
     def openprograms(self) -> None:
         self.window = QDialog()
         self.ui = ui_programs.Ui_Dialog()
         self.ui.setupUi(self.window)
         self.window.show()
         if self.window.exec() == QDialog.Accepted:
-            self.programlist=self.ui.program_list
-
-
+            self.programlist = self.ui.program_list
 
         pass
 
@@ -627,7 +707,7 @@ class Ui_WindowsAnswerfile(object):
         WindowsAnswerfile.setStatusTip("")
         # endif // QT_CONFIG(statustip)
         self.pushButton.setText(QCoreApplication.translate("WindowsAnswerfile", u"Generate", None))
-        self.user_edit_button.setText(QCoreApplication.translate("WindowsAnswerfile", u"Edit Users", None))
+        self.user_edit_button.setText(QCoreApplication.translate("WindowsAnswerfile", u"Add User", None))
         self.program_edit_button.setText(
             QCoreApplication.translate("WindowsAnswerfile", u"Edit Preinstalled Programs", None))
         # if QT_CONFIG(tooltip)

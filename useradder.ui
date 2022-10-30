@@ -181,9 +181,7 @@ background-color: #fbfbfb
    </property>
    <property name="font">
     <font>
-     <family>Segoe UI Variable Display Semib</family>
      <pointsize>13</pointsize>
-     <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
@@ -199,14 +197,12 @@ background-color: #fbfbfb
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>351</width>
+     <width>341</width>
      <height>61</height>
     </rect>
    </property>
    <property name="font">
-    <font>
-     <family>Segoe UI Variable Display</family>
-    </font>
+    <font/>
    </property>
    <property name="text">
     <string>Use this form to add new users to the system. 

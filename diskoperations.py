@@ -40,10 +40,21 @@ def copy_to_oem_folder(driveletter:str):
     #Then we delete everything in the destination dir.
     delete_from_dir(destinationdir)
 
+    for file_name in os.listdir(originaldir):
+        source=originaldir+file_name
+        dest=destinationdir+file_name
+        if os.path.isfile(source):
+            shutil.move(source,dest)
 
+def copy_to_sources_folder(driveletter:str):
+    """
+    Copies the autounattend.xml file to the drive root
+    :param driveletter: Drive letter to copy to
+    :return:
+    """
+    originaldir = os.path.join(os.getcwd(),'autounattend.xml')
+    destinationdir = os.path.join(driveletter,'autounattend.xml')
     shutil.move(originaldir,destinationdir)
-
-    pass
 
 if __name__=="__main__":
     copy_to_oem_folder("D:")

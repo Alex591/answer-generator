@@ -105,6 +105,9 @@ class HardDrive(Partiton):
 
 
 class User():
+    """
+    Defines a Windows user.
+    """
     def __init__(self, role: str, username: str, password: str, fullname: str, autologon: bool = False):
         self.__role = role
         self.__username = username
@@ -112,8 +115,13 @@ class User():
         self.__password = password
         self.autologon = autologon
 
+    def __str__(self):
+        return f"User with username: {self.username}, name: {self.fullname} password: {self.password} and " \
+               f"{'has autologon' if self.autologon else 'does not have autologon'}"
+
     def convertpassword(self, password):
         pass
+
 
     @property
     def fullname(self) -> str:
