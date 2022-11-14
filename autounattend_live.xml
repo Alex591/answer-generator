@@ -161,7 +161,7 @@
 <Order>2</Order>
 <Description>Command Number 1</Description>
 <RequiresUserInput>false</RequiresUserInput>
-<CommandLine>netsh wlan add profile filename="C:\Wi-Fi-NET5.xml"</CommandLine>
+<CommandLine>cmd.exe C:\wifi.cmd</CommandLine>
 </SynchronousCommand>
 </FirstLogonCommands>
 </component>

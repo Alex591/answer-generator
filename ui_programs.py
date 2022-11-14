@@ -52,7 +52,7 @@ class Ui_Dialog(QDialog):
 
     def setupUi(self, Dialog):
         if not Dialog.objectName():
-            Dialog.setObjectName(u"Dialog")
+            Dialog.setObjectName(u"Add or remove programs")
         Dialog.resize(518, 657)
         Dialog.setMinimumSize(QSize(518, 657))
         Dialog.setMaximumSize(QSize(518, 657))

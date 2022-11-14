@@ -9,17 +9,6 @@ class Partiton():
 
     ...
 
-    Attributes
-
-    format: str
-        test
-    label: str
-        test2
-    size: int
-        The drive size in Megabytes
-    letter:
-        A letter label for the partition. Must be an ASCII character.
-
 
     """
     def __init__(self, format: str = None, label: str = None, size: int = None, letter: str = None, extend: bool = None,
@@ -138,7 +127,3 @@ class User():
     @property
     def password(self) -> str:
         return self.__password
-
-
-class Registry:
-    pass

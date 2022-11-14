@@ -154,7 +154,7 @@ class Ui_WindowsAnswerfile(object):
         if self.window.exec() == QDialog.Accepted:
             self.drivetosave = self.ui.drivetosave
             diskoperations.copy_to_oem_folder(self.drivetosave)
-            diskoperations.copy_to_sources_folder(self.drivetosave)
+            diskoperations.copy_to_sources_folder(f"{self.drivetosave}/")
 
     # opens the User adder window
     def openusers(self) -> None:
